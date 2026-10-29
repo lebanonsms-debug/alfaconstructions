@@ -186,9 +186,9 @@ export const languages: { code: 'fr' | 'en'; label: string; hreflang: string }[]
 ]
 
 export const defaultSeo = {
-  title: 'alfa CONSTRUCTION — Bâtiment, Travaux Publics, Transport & Logistique, Carrières',
+  title: 'ALFA CONSTRUCTION — Bâtiment, Travaux Publics, Transport & Logistique, Carrières',
   description:
-    'alfa CONSTRUCTION est une entreprise de génie civil et de travaux publics basée à la République du Congo. Bâtiment, transport, logistique, exploitation de carrières et bureau d\'étude.',
+    'ALFA CONSTRUCTION est une entreprise de génie civil et de travaux publics basée à la République du Congo. Bâtiment, transport, logistique, exploitation de carrières et bureau d\'étude.',
   canonical: 'https://alfaconstructions.vercel.app',
 }
 

@@ -37,7 +37,7 @@ export default function Home() {
               </HeroScrollReveal>
               <HeroScrollReveal>
                 <p className="mt-5 text-base sm:text-lg md:text-xl text-white/70 max-w-xl leading-relaxed">
-                  alfa CONSTRUCTION est une entreprise de bâtiment, de travaux publics,
+                  ALFA CONSTRUCTION est une entreprise de bâtiment, de travaux publics,
                   de transport et de logistique basée en République du Congo.
                 </p>
               </HeroScrollReveal>

@@ -8,7 +8,7 @@ import { Save, Trash2, Globe, Mail, Phone, MapPin, Building, Clock, CheckCircle 
 export default function AdminSettings() {
   const navigate = useNavigate();
   const [settings, setSettings] = useState({
-    company_name: 'alfa CONSTRUCTION',
+    company_name: 'ALFA CONSTRUCTION',
     contact_person: 'Ali Safa',
     job_title: 'Président Directeur Général',
     email_primary: 'ali-safa@alfa-constructions.com',

@@ -13,7 +13,7 @@ export function Footer() {
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2 group">
               <span className="text-white font-bold text-base sm:text-xl tracking-tight">
-                alfa<span className="text-[#D4AF37]"> CONSTRUCTION</span>
+                ALFA<span className="text-[#D4AF37]"> CONSTRUCTION</span>
               </span>
             </Link>
             <p className="text-sm text-white/60 max-w-md">
@@ -84,7 +84,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {currentYear} alfa CONSTRUCTION. Tous droits réservés.
+            &copy; {currentYear} ALFA CONSTRUCTION. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4">
             <a

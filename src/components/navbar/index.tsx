@@ -28,7 +28,7 @@ export function Navbar() {
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
           <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">
-            alfa<span className="text-[#D4AF37]"> CONSTRUCTION</span>
+            ALFA<span className="text-[#D4AF37]"> CONSTRUCTION</span>
           </span>
         </Link>
 

@@ -17,7 +17,7 @@ export default function Privacy() {
             <div>
               <h2 className="text-xl font-semibold text-white mb-2">1. Collecte des données</h2>
               <p className="mt-1">
-                alfa CONSTRUCTION collecte uniquement les informations nécessaires à la
+                ALFA CONSTRUCTION collecte uniquement les informations nécessaires à la
                 prise en charge de vos demandes. Lors de l&apos;envoi d&apos;un message
                 via le formulaire de contact, nous collectons :
               </p>
@@ -46,7 +46,7 @@ export default function Privacy() {
               <h2 className="text-xl font-semibold text-white mb-2">3. Partage des données</h2>
               <p className="mt-1">
                 Vos données personnelles ne sont pas vendues à des tiers.
-                Elles peuvent être transmises aux services concernés de alfa CONSTRUCTION
+                Elles peuvent être transmises aux services concernés de ALFA CONSTRUCTION
                 ou à nos partenaires techniques nécessaires au traitement.
               </p>
             </div>
