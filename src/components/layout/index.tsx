@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import { ScrollProgress } from '@/components/animation'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 
@@ -26,7 +27,8 @@ export function Layout({
 
   return (
     <div className={pageTheme}>
-      <div className="min-h-screen flex flex-col bg-[#0A192F] text-white">
+      <ScrollProgress />
+      <div className={pageTheme}>
         {!noNavbar && <Navbar />}
         <main className="flex-1 pt-16 sm:pt-20">
           {children}

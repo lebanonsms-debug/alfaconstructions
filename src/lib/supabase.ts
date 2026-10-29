@@ -1,6 +1,6 @@
 // ---- Supabase client ----
 
-import { createClient } from 'supabase/globals'
+import { createClient } from '@supabase/supabase-js'
 
 // Environment variables are required for the build to succeed
 // Do not commit .env files with secrets

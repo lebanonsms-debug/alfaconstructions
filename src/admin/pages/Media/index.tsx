@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { Card, CardHeader, CardTitle, CardContent, Input, Textarea, Select, Badge, Modal } from '@/components/ui';
-import { Upload, Image as ImageIcon, Trash2, Save, X } from 'lucide-react';
+import { Edit, Trash2, Upload, X, CheckCircle } from 'lucide-react';
 
 export default function AdminMedia() {
   const navigate = useNavigate();

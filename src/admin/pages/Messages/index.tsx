@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { Card, CardHeader, CardTitle, CardContent, Badge, Input, Textarea, Modal } from '@/components/ui';
-import { Mail, MessageSquare, Plus, Edit, Trash2, Save, X, Clock, CheckCircle, FileText, Phone } from 'lucide-react';
+import { Send, Edit, Trash2, Phone, Save } from 'lucide-react';
 
 export default function AdminMessages() {
   const navigate = useNavigate();

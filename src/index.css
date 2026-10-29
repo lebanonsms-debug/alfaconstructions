@@ -6,3 +6,94 @@ body {
   background-color: #0A192F;
   color: #FFFFFF;
 }
+
+/* --- Animation Keyframes --- */
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+/* Pulse for scroll indicators */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.5; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-4px); }
+}
+
+/* Animated crane boom rotation */
+@keyframes crane-swing {
+  0%, 100% { transform: rotate(0deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* Camera pan tilt effect */
+@keyframes camera-tilt {
+  0%, 100% { transform: rotateX(0deg) rotateY(0deg); }
+  50% { transform: rotateX(5deg) rotateY(3deg); }
+}
+
+/* Stagger animation */
+@keyframes stagger-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Count-up animation */
+@keyframes count-up {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Glow pulse for CTA */
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.5); }
+  50% { box-shadow: 0 0 20px 5px rgba(212, 175, 55, 0.3); }
+}
+
+/* Animated underline for CTA */
+@keyframes underline-slide {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+/* Fade-in for hero reveals */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Parallax layers */
+@keyframes parallax-bg {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-20px) translateX(10px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* Grow for card hover */
+@keyframes grow-scale {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.05); }
+}
+
+/* Loading spinner */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Enable disable scroll for fixed elements */
+html {
+  scroll-behavior: smooth;
+}
