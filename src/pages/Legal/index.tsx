@@ -17,7 +17,7 @@ export default function Legal() {
             <div>
               <h2 className="text-xl font-semibold text-white mb-2">Éditeur</h2>
               <p className="mt-1">
-                ALFA CONSTRUCTION
+                alfa CONSTRUCTION
                 <br />
                 Avenue Docteur Cardorelle, Songolo, Centre-Ville
                 <br />
@@ -48,7 +48,7 @@ export default function Legal() {
               <h2 className="text-xl font-semibold text-white mb-2">Propriété intellectuelle</h2>
               <p className="mt-1">
                 Tout contenu du site, texte, images, vidéos, logos, marques,
-                est la propriété exclusive d&apos;ALFA CONSTRUCTION.
+                est la propriété exclusive d&apos;alfa CONSTRUCTION.
                 Toute reproduction, même partielle, est soumise à l&apos;accord écrit de l&apos;éditeur.
               </p>
             </div>
@@ -57,7 +57,7 @@ export default function Legal() {
               <h2 className="text-xl font-semibold text-white mb-2">Liens hypertextes</h2>
               <p className="mt-1">
                 Le site contient des liens hypertextes vers des sites tiers.
-                ALFA CONSTRUCTION n&apos;accepte pas la responsabilité de leur contenu.
+                alfa CONSTRUCTION n&apos;accepte pas la responsabilité de leur contenu.
               </p>
             </div>
 

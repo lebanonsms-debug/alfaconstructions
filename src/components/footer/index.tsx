@@ -12,11 +12,8 @@ export function Footer() {
           {/* Brand + Contact */}
           <div className="lg:col-span-2 space-y-4">
             <Link to="/" className="flex items-center gap-2 group">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#D4AF37] flex items-center justify-center text-[#0A192F] font-bold text-base sm:text-xl transition-transform group-hover:scale-105">
-                AL
-              </div>
-              <span className="text-white font-bold text-lg sm:text-2xl tracking-tight">
-                ALFA<span className="text-[#D4AF37]"> CONSTRUCTION</span>
+              <span className="text-white font-bold text-base sm:text-xl tracking-tight">
+                alfa<span className="text-[#D4AF37]"> CONSTRUCTION</span>
               </span>
             </Link>
             <p className="text-sm text-white/60 max-w-md">
@@ -87,7 +84,7 @@ export function Footer() {
 
         <div className="mt-8 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/40">
-            &copy; {currentYear} ALFA CONSTRUCTION. Tous droits réservés.
+            &copy; {currentYear} alfa CONSTRUCTION. Tous droits réservés.
           </p>
           <div className="flex items-center gap-4">
             <a

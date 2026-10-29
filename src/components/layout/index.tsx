@@ -14,7 +14,7 @@ export interface LayoutProps {
 
 export function Layout({
   children,
-  title = 'ALFA CONSTRUCTION',
+  title = 'alfa CONSTRUCTION',
   description = 'Entreprise de génie civil et de travaux publics au Congo.',
   noNavbar = false,
   noFooter = false,

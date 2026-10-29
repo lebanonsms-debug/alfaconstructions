@@ -18,7 +18,7 @@ export default function About() {
             <div className="bg-white/5 rounded-xl p-6">
               <h2 className="text-white font-semibold text-xl mb-3">Notre Histoire</h2>
               <p className="text-white/70 text-sm leading-relaxed">
-                ALFA CONSTRUCTION est née avec une conviction simple : la construction
+                alfa CONSTRUCTION est née avec une conviction simple : la construction
                 doit allier solidité technique, respect de l'environnement et accompagnement
                 de la ville.
               </p>

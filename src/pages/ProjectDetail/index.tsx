@@ -44,7 +44,7 @@ export default function ProjectDetail() {
 
             <p className="text-white/60 text-base mb-8">
               Document de presentation technique des travaux d\amenagment de la plateforme 600.
-              Cette realisation presente la sequence des operations realisees par ALFA CONSTRUCTION.
+              Cette realisation presente la sequence des operations realisees par alfa CONSTRUCTION.
             </p>
 
             <div className="bg-white/5 border border-white/10 rounded-xl p-4 mb-8">

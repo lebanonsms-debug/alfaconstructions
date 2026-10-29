@@ -341,7 +341,7 @@ export function TestimonialsCarousel() {
 
   const testimonials = [
     {
-      quote: "ALFA CONSTRUCTION a réalisé notre projet de salle de marché avec professionnalisme. Le travail est de haute qualité et notre délais respecté.",
+      quote: "alfa CONSTRUCTION a réalisé notre projet de salle de marché avec professionnalisme. Le travail est de haute qualité et notre délais respecté.",
       name: "Marie K.",
       role: "Directrice, Marché de Brazzaville",
       initials: "MK",
