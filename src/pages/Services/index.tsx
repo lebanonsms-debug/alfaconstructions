@@ -1,5 +1,5 @@
-import { Layout } from '../layout'
-import { Button } from '../ui'
+import { Layout } from '../../components/layout'
+import { Button } from '../../components/ui'
 import { ArrowRight, Building, Truck, Landmark, FlaskConical, MapPin } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
