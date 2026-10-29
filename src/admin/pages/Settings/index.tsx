@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { Save, Trash2, Globe, Mail, Phone, MapPin, Building, Clock } from 'lucide-react';
+import { Save, Trash2, Globe, Mail, Phone, MapPin, Building, Clock, CheckCircle } from 'lucide-react';
 
 export default function AdminSettings() {
   const navigate = useNavigate();
@@ -32,7 +32,8 @@ export default function AdminSettings() {
       .channel('site_settings')
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, () => fetchSettings())
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    const unsubscribe = () => supabase.removeChannel(channel);
+    return unsubscribe;
   }, []);
 
   const fetchSettings = async () => {

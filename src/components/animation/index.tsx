@@ -30,7 +30,7 @@ export function ScrollProgress() {
 // ============================================
 // Hero Scroll Reveal
 // ============================================
-export function HeroScrollReveal({ children, className = "", startOffset = 0 }: { children: React.ReactNode; className?: string; startOffset?: number }) {
+export function HeroScrollReveal({ children, className = "", startOffset = 0, delay = 100 }: { children: React.ReactNode; className?: string; startOffset?: number; delay?: number }) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -50,9 +50,14 @@ export function HeroScrollReveal({ children, className = "", startOffset = 0 }: 
     return () => observer.disconnect();
   }, []);
 
+  const childStyle: React.CSSProperties = {
+    transitionDelay: isVisible ? "0ms" : `${delay}ms`,
+  };
+
   return (
     <div
       id="hero-reveal"
+      style={childStyle}
       className={`transition-all duration-1000 ease-out ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"
       } ${className}`}

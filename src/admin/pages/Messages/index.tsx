@@ -5,14 +5,26 @@ import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import { Mail, Phone, Send, Edit, Trash2, CheckCircle, Clock, Archive, XCircle, Eye, Plus } from 'lucide-react';
 
+interface ContactMessage {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+  status: 'Nouveau' | 'En cours' | 'Traité' | 'Archivé';
+  created_at: string;
+}
+
 export default function AdminMessages() {
   const navigate = useNavigate();
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('Tous');
-  const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '', status: 'Nouveau' as ContactMessage['status'] });
   const [showModal, setShowModal] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchMessages();
@@ -20,7 +32,8 @@ export default function AdminMessages() {
       .channel('contact_messages')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'contact_messages' }, () => fetchMessages())
       .subscribe();
-    return () => supabase.removeChannel(messageChannel);
+    const unsubscribe = () => supabase.removeChannel(messageChannel);
+    return unsubscribe;
   }, []);
 
   const fetchMessages = async () => {

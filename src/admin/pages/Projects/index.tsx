@@ -5,13 +5,48 @@ import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import { FolderOpen, Plus, Edit, Trash2, Eye, MapPin, Calendar } from 'lucide-react';
 
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Layout } from '@/components/layout';
+import { Button } from '@/components/ui';
+import { supabase } from '@/lib/supabase';
+import { FolderOpen, Plus, Edit, Trash2, Eye, MapPin, Calendar } from 'lucide-react';
+
+interface Project {
+  id: string;
+  title: string;
+  slug: string;
+  short_description: string;
+  description: string;
+  location: string;
+  category_id: string;
+  status: 'draft' | 'published' | 'archived';
+  start_date: string;
+  completion_date: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export default function AdminProjects() {
   const navigate = useNavigate();
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({ title: '', slug: '', short_description: '', description: '', location: '', category_id: '', status: 'draft', start_date: '', completion_date: '' });
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetchProjects();
+    const channel = supabase
+      .channel('projects')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => fetchProjects())
+      .subscribe();
+    const unsubscribe = () => {
+      supabase.removeChannel(channel);
+    };
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     fetchProjects();

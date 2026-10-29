@@ -5,15 +5,24 @@ import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import { Plus, Upload, Image as ImageIcon, Trash2, Edit, X, Save, FolderOpen } from 'lucide-react';
 
+interface ProjectImage {
+  id: string;
+  caption: string;
+  alt_text: string;
+  storage_path: string;
+  display_order: number;
+}
+
 export default function AdminMedia() {
   const navigate = useNavigate();
-  const [files, setFiles] = useState([]);
+  const [files, setFiles] = useState<ProjectImage[]>([]);
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [showModal, setShowModal] = useState(false);
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const [formData, setFormData] = useState({ caption: '', alt_text: '', storage_path: '' });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     fetchFiles();
@@ -21,7 +30,10 @@ export default function AdminMedia() {
       .channel('project_images')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'project_images' }, () => fetchFiles())
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    const unsubscribe = () => {
+      supabase.removeChannel(channel);
+    };
+    return unsubscribe;
   }, []);
 
   const fetchFiles = async () => {

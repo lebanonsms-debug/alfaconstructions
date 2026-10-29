@@ -27,9 +27,6 @@ export function Navbar() {
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-lg bg-[#D4AF37] flex items-center justify-center text-[#0A192F] font-bold text-lg sm:text-xl transition-transform group-hover:scale-105">
-            AL
-          </div>
           <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">
             ALFA<span className="text-[#D4AF37]"> CONSTRUCTION</span>
           </span>

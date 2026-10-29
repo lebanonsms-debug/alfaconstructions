@@ -4,7 +4,7 @@ import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import {
-  BarChart3, FolderOpen, FileText, Mail, MessageSquare, Settings, Users, PenTool, TrendingUp, Clock, CheckCircle, RefreshCw
+  BarChart3, FolderOpen, FileText, Mail, MessageSquare, Settings, Users, PenTool, TrendingUp, Clock, CheckCircle, RefreshCw, Plus
 } from 'lucide-react';
 
 export default function AdminDashboard() {
