@@ -45,3 +45,6 @@ supabase/local
 *.key
 *.pem
 *.cert
+
+.vercel
+.env*
