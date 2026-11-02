@@ -42,7 +42,7 @@ export function HorizontalScrollBanner({ className = '' }) {
     },
   ];
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     if (isTransitioning) return;
     setIsTransitioning(true);
     setActiveIndex(index);
@@ -235,7 +235,7 @@ export function TestimonialsCarousel() {
     },
   ];
 
-  const goToSlide = (index) => {
+  const goToSlide = (index: number) => {
     setActiveIndex(index);
   };
 
@@ -293,7 +293,7 @@ export function TestimonialsCarousel() {
 // ============================================
 export function ProjectPortfolio() {
   const [filter, setFilter] = useState('Tous');
-  const [isHovering, setIsHovering] = useState(null);
+  const [isHovering, setIsHovering] = useState<number | null>(null);
 
   const filters = ['Tous', 'Bâtiment', 'Travaux publics', 'Carrières', 'Transport'];
 

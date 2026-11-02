@@ -32,8 +32,7 @@ export default function AdminMessages() {
       .channel('contact_messages')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'contact_messages' }, () => fetchMessages())
       .subscribe();
-    const unsubscribe = () => supabase.removeChannel(messageChannel);
-    return unsubscribe;
+    return () => { supabase.removeChannel(messageChannel); };
   }, []);
 
   const fetchMessages = async () => {
@@ -54,8 +53,8 @@ export default function AdminMessages() {
     }
   };
 
-  const getStatusBadge = (status) => {
-    const colors = {
+  const getStatusBadge = (status: string) => {
+    const colors: Record<string, string> = {
       'Nouveau': 'bg-blue-500/20 text-blue-400',
       'En cours': 'bg-yellow-500/20 text-yellow-400',
       'En attente': 'bg-purple-500/20 text-purple-400',
@@ -65,7 +64,7 @@ export default function AdminMessages() {
     return <span className={`px-2 py-1 rounded-full text-xs font-medium ${colors[status] || 'bg-gray-500/20 text-gray-400'}`}>{status}</span>;
   };
 
-  const handleStatusChange = async (id, newStatus) => {
+  const handleStatusChange = async (id: string, newStatus: string) => {
     try {
       await supabase.from('contact_messages').update({ status: newStatus }).eq('id', id);
       fetchMessages();
@@ -86,7 +85,7 @@ export default function AdminMessages() {
       if (!error) {
         setShowModal(false);
         setEditingId(null);
-        setFormData({ name: '', email: '', subject: '', message: '' });
+        setFormData({ name: '', email: '', subject: '', message: '', status: 'Nouveau' });
         fetchMessages();
       }
     } catch (error) {
@@ -183,7 +182,7 @@ export default function AdminMessages() {
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => { setEditingId(msg.id); setFormData({ name: msg.name, email: msg.email || '', subject: msg.subject, message: msg.message }); setShowModal(true); }}
+                      onClick={() => { setEditingId(msg.id); setFormData({ name: msg.name, email: msg.email || '', subject: msg.subject, message: msg.message, status: msg.status }); setShowModal(true); }}
                       title="Voir/A modifier"
                     >
                       <Edit className="w-4 h-4 text-white/60" />

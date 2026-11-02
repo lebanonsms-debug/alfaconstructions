@@ -48,8 +48,8 @@ export default function AdminMedia() {
     }
   };
 
-  const handleUpload = async (e) => {
-    const file = e.target.files[0];
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
     setUploadProgress(0);
@@ -92,7 +92,7 @@ export default function AdminMedia() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Supprimer ce fichier ?')) {
       try {
         await supabase.from('project_images').delete().eq('id', id);
@@ -104,7 +104,7 @@ export default function AdminMedia() {
   };
 
   const openAdd = () => { setEditingId(null); setFormData({ caption: '', alt_text: '', storage_path: '' }); setShowModal(true); };
-  const openEdit = (f) => { setEditingId(f.id); setFormData({ caption: f.caption, alt_text: f.alt_text, storage_path: f.storage_path }); setShowModal(true); };
+  const openEdit = (f: ProjectImage) => { setEditingId(f.id); setFormData({ caption: f.caption, alt_text: f.alt_text, storage_path: f.storage_path }); setShowModal(true); };
 
   const statusColors = { draft: 'bg-gray-500/20 text-gray-400', published: 'bg-green-500/20 text-green-400', archived: 'bg-yellow-500/20 text-yellow-400' };
 

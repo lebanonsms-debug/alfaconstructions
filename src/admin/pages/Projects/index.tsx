@@ -5,13 +5,6 @@ import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import { FolderOpen, Plus, Edit, Trash2, Eye, MapPin, Calendar } from 'lucide-react';
 
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Layout } from '@/components/layout';
-import { Button } from '@/components/ui';
-import { supabase } from '@/lib/supabase';
-import { FolderOpen, Plus, Edit, Trash2, Eye, MapPin, Calendar } from 'lucide-react';
-
 interface Project {
   id: string;
   title: string;
@@ -42,19 +35,7 @@ export default function AdminProjects() {
       .channel('projects')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => fetchProjects())
       .subscribe();
-    const unsubscribe = () => {
-      supabase.removeChannel(channel);
-    };
-    return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    fetchProjects();
-    const channel = supabase
-      .channel('projects')
-      .on('postgres_changes', { event: '*', schema: 'public', table: 'projects' }, () => fetchProjects())
-      .subscribe();
-    return () => supabase.removeChannel(channel);
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const fetchProjects = async () => {
@@ -85,7 +66,7 @@ export default function AdminProjects() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Supprimer ce projet ?')) {
       try {
         await supabase.from('projects').delete().eq('id', id);
@@ -97,7 +78,7 @@ export default function AdminProjects() {
   };
 
   const openAdd = () => { setEditingId(null); setFormData({ title: '', slug: '', short_description: '', description: '', location: '', category_id: '', status: 'draft', start_date: '', completion_date: '' }); setShowModal(true); };
-  const openEdit = (p) => { setEditingId(p.id); setFormData({ title: p.title, slug: p.slug, short_description: p.short_description, description: p.description, location: p.location, category_id: p.category_id, status: p.status, start_date: p.start_date, completion_date: p.completion_date }); setShowModal(true); };
+  const openEdit = (p: Project) => { setEditingId(p.id); setFormData({ title: p.title, slug: p.slug, short_description: p.short_description, description: p.description, location: p.location, category_id: p.category_id, status: p.status, start_date: p.start_date, completion_date: p.completion_date }); setShowModal(true); };
 
   const statusColors = { draft: 'bg-gray-500/20 text-gray-400', published: 'bg-green-500/20 text-green-400', archived: 'bg-yellow-500/20 text-yellow-400' };
 

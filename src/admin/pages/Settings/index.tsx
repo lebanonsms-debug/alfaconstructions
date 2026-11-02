@@ -32,8 +32,7 @@ export default function AdminSettings() {
       .channel('site_settings')
       .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'site_settings' }, () => fetchSettings())
       .subscribe();
-    const unsubscribe = () => supabase.removeChannel(channel);
-    return unsubscribe;
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const fetchSettings = async () => {

@@ -3,15 +3,16 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { PenTool, Plus, Edit, Trash2, Eye, X, Save, Gateway, Globe, FolderOpen } from 'lucide-react';
+import { PenTool, Plus, Edit, Trash2, Eye, X, Save, FolderOpen } from 'lucide-react';
+import type { Service } from '@/types';
 
 export default function AdminServices() {
   const navigate = useNavigate();
-  const [services, setServices] = useState([]);
+  const [services, setServices] = useState<Service[]>([]);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
-  const [editingId, setEditingId] = useState(null);
-  const [formData, setFormData] = useState({ title: '', slug: '', short_description: '', description: '', image_path: '', status: 'draft' });
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [formData, setFormData] = useState({ title: '', slug: '', short_description: '', description: '', image_path: '', status: 'draft' as Service['status'] });
 
   useEffect(() => {
     fetchServices();
@@ -19,7 +20,7 @@ export default function AdminServices() {
       .channel('services')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'services' }, () => fetchServices())
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const fetchServices = async () => {
@@ -50,7 +51,7 @@ export default function AdminServices() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Supprimer ce service ?')) {
       try {
         await supabase.from('services').delete().eq('id', id);
@@ -62,7 +63,7 @@ export default function AdminServices() {
   };
 
   const openAdd = () => { setEditingId(null); setFormData({ title: '', slug: '', short_description: '', description: '', image_path: '', status: 'draft' }); setShowModal(true); };
-  const openEdit = (s) => { setEditingId(s.id); setFormData({ title: s.title, slug: s.slug, short_description: s.short_description, description: s.description, image_path: s.image_path, status: s.status }); setShowModal(true); };
+  const openEdit = (s: Service) => { setEditingId(s.id); setFormData({ title: s.title, slug: s.slug, short_description: s.short_description, description: s.description, image_path: s.image_path || '', status: s.status }); setShowModal(true); };
 
   const statusColors = { draft: 'bg-gray-500/20 text-gray-400', published: 'bg-green-500/20 text-green-400', archived: 'bg-yellow-500/20 text-yellow-400' };
 

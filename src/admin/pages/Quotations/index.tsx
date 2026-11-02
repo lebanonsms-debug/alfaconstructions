@@ -7,10 +7,11 @@ import { MessageSquare, Plus, Edit, Trash2, CheckCircle, Clock, Archive, XCircle
 
 export default function AdminQuotations() {
   const navigate = useNavigate();
-  const [quotes, setQuotes] = useState([]);
+  const [quotes, setQuotes] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [statusFilter, setStatusFilter] = useState('Tous');
-  const [editingId, setEditingId] = useState(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState(false);
   const [formData, setFormData] = useState({ name: '', company: '', email: '', phone: '', service_id: '', project_location: '', project_description: '', estimated_budget: '', desired_start_date: '', status: 'Nouveau' });
 
   useEffect(() => {
@@ -19,7 +20,7 @@ export default function AdminQuotations() {
       .channel('quotations')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'quotation_requests' }, () => fetchQuotes())
       .subscribe();
-    return () => supabase.removeChannel(channel);
+    return () => { supabase.removeChannel(channel); };
   }, []);
 
   const fetchQuotes = async () => {
@@ -54,7 +55,7 @@ export default function AdminQuotations() {
     }
   };
 
-  const handleStatusChange = async (id, newStatus) => {
+  const handleStatusChange = async (id: string, newStatus: string) => {
     try {
       await supabase.from('quotation_requests').update({ status: newStatus }).eq('id', id);
       fetchQuotes();
@@ -63,7 +64,7 @@ export default function AdminQuotations() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id: string) => {
     if (confirm('Supprimer ce devis ?')) {
       try {
         await supabase.from('quotation_requests').delete().eq('id', id);
@@ -75,9 +76,9 @@ export default function AdminQuotations() {
   };
 
   const openAdd = () => { setEditingId(null); setFormData({ name: '', company: '', email: '', phone: '', service_id: '', project_location: '', project_description: '', estimated_budget: '', desired_start_date: '', status: 'Nouveau' }); setShowModal(true); };
-  const openEdit = (q) => { setEditingId(q.id); setFormData({ name: q.name, company: q.company, email: q.email, phone: q.phone, service_id: q.service_id, project_location: q.project_location, project_description: q.project_description, estimated_budget: q.estimated_budget, desired_start_date: q.desired_start_date, status: q.status }); setShowModal(true); };
+  const openEdit = (q: any) => { setEditingId(q.id); setFormData({ name: q.name, company: q.company, email: q.email, phone: q.phone, service_id: q.service_id, project_location: q.project_location, project_description: q.project_description, estimated_budget: q.estimated_budget, desired_start_date: q.desired_start_date, status: q.status }); setShowModal(true); };
 
-  const statusColors = { 'Nouveau': 'bg-blue-500/20 text-blue-400', 'En cours': 'bg-yellow-500/20 text-yellow-400', 'Traité': 'bg-green-500/20 text-green-400', 'Archivé': 'bg-gray-500/20 text-gray-400' };
+  const statusColors: Record<string, string> = { 'Nouveau': 'bg-blue-500/20 text-blue-400', 'En cours': 'bg-yellow-500/20 text-yellow-400', 'Traité': 'bg-green-500/20 text-green-400', 'Archivé': 'bg-gray-500/20 text-gray-400' };
 
   const statusOptions = ['Tous', 'Nouveau', 'En cours', 'Traité', 'Archivé'];
 

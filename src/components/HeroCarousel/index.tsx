@@ -122,8 +122,8 @@ export default function HeroCarousel() {
   const [touchStart, setTouchStart] = useState(0);
   const [touchEnd, setTouchEnd] = useState(0);
 
-  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0].clientX);
-  const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0].clientX);
+  const handleTouchStart = (e: React.TouchEvent) => setTouchStart(e.targetTouches[0]?.clientX || 0);
+  const handleTouchMove = (e: React.TouchEvent) => setTouchEnd(e.targetTouches[0]?.clientX || 0);
   const handleTouchEnd = () => {
     if (touchStart - touchEnd > 50) next();
     if (touchStart - touchEnd < -50) prev();

@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { LogOut, LayoutDashboard, FolderOpen, FileText, Image as ImageIcon, Mail, MessageSquare, Settings, Home } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
 
@@ -16,7 +16,11 @@ const navItems = [
   { label: 'Paramètres', href: '/admin/settings', icon: Settings },
 ];
 
-export default function AdminLayout() {
+interface AdminLayoutProps {
+  children?: ReactNode;
+}
+
+export default function AdminLayout({ children }: AdminLayoutProps) {
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, loading, isAdmin } = useAuth();
@@ -109,7 +113,7 @@ export default function AdminLayout() {
 
             {/* Main content */}
             <div className="flex-1 min-w-0">
-              <Outlet />
+              {children || <Outlet />}
             </div>
           </div>
         </div>

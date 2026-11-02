@@ -187,7 +187,7 @@ export function AnimatedBuildingConstruction({ className = '', speed = 4 }) {
           {currentStage.title}
         </text>
         <text x="400" y="385" fill="#ffffff" fontSize="12" fontFamily="Inter" textAnchor="middle" opacity="0.7">
-          {stages[stage].desc}
+          {currentStage.desc}
         </text>
       </svg>
 
@@ -376,7 +376,7 @@ export function AnimatedBuildingProgress({ className = '', steps = 5 }) {
       <div className="p-4">
         <div className="flex items-center justify-between mb-4">
           <h3 className="text-sm font-semibold text-white">Progression du chantier</h3>
-          <span className="text-xs text-white/50">{(stageData[currentStep] || stageData[0]).phase} — {Math.round((currentStep / steps) * 100)}%</span>
+          <span className="text-xs text-white/50">{(stageData[currentStep] || stageData[0])!.phase} — {Math.round((currentStep / steps) * 100)}%</span>
         </div>
 
         <div className="w-full h-2 bg-[#14263F] rounded-full overflow-hidden">
