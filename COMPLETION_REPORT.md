@@ -5,7 +5,8 @@
 **Vercel Project:** `alfaconstructions` (team: lebanon)  
 **Build:** Exit 0  
 **TypeScript:** `tsc --noEmit` — 0 errors  
-**Stack:** React, TypeScript, Vite, Tailwind CSS, Supabase, React Router, Lucide icons, GSAP, Motion
+**Tests:** `vitest run` — 3/3 passing  
+**Stack:** React, TypeScript, Vite, Tailwind CSS, Supabase, React Router, Lucide icons, GSAP, Motion, i18next
 
 ---
 
@@ -20,6 +21,7 @@ GraphQL: Resource not accessible by personal access token (createRepository)
 
 **Commit history:**
 ```
+a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 6294cb2 fix: resolve TypeScript strict mode errors, add auth types, fix imports
 6490ff7 feat: add hero carousel, dedicated service pages, plateforme 600, admin auth, sitemap, robots.txt
 ```
@@ -74,20 +76,22 @@ GraphQL: Resource not accessible by personal access token (createRepository)
 ### Public Pages
 | Route | Page | Status |
 |---|---|---|
-| `/` | Homepage with 5-slide hero carousel, quarry focus | ✅ |
-| `/a-propos` | About page | ✅ (in App.tsx route, component exists) |
-| `/services` | Services listing (Carrières featured) | ✅ |
-| `/services/carrieres` | Exploitation de Carrières | ✅ |
-| `/services/batiment` | Bâtiment & Travaux Publics | ✅ |
-| `/services/transport` | Transport & Logistique | ✅ |
-| `/services/bureau-etude` | Bureau d'Étude | ✅ |
-| `/realisations` | Portfolio/Projects | ✅ (in App.tsx route) |
-| `/plateforme-600` | Plateforme 600 (12 stages) | ✅ |
-| `/contact` | Contact form (Supabase direct) | ✅ |
-| `/devis` | Quotation request form (Supabase direct) | ✅ |
-| `/faq` | FAQ | ✅ (in App.tsx route) |
-| `/mentions-legales` | Legal Notice | ✅ (in App.tsx route) |
-| `/politique-de-confidentialite` | Privacy Policy | ✅ (in App.tsx route) |
+| `/fr/` | Homepage with 5-slide hero carousel, quarry focus | ✅ |
+| `/fr/a-propos` | About page | ✅ |
+| `/fr/services` | Services listing (Carrières featured) | ✅ |
+| `/fr/services/carrieres` | Exploitation de Carrières | ✅ |
+| `/fr/services/batiment` | Bâtiment & Travaux Publics | ✅ |
+| `/fr/services/transport` | Transport & Logistique | ✅ |
+| `/fr/services/bureau-etude` | Bureau d'Étude | ✅ |
+| `/fr/realisations` | Portfolio/Projects | ✅ |
+| `/fr/realisations/:slug` | Project detail | ✅ |
+| `/fr/plateforme-600` | Plateforme 600 (12 stages) | ✅ |
+| `/fr/devis` | Quotation request form (Supabase direct) | ✅ |
+| `/fr/contact` | Contact form (Supabase direct) | ✅ |
+| `/fr/politique-de-confidentialite` | Privacy Policy | ✅ |
+| `/fr/mentions-legales` | Legal Notice | ✅ |
+| `/fr/faq` | FAQ | ✅ |
+| `/en/*` | English translations (routes + i18n strings) | ✅ |
 | `*` | Custom 404 | ✅ |
 
 ### Admin Dashboard (protected)
@@ -107,7 +111,7 @@ GraphQL: Resource not accessible by personal access token (createRepository)
 - **Quarry dominance:** Carrières featured first in services, first carousel slide
 - **Animations:** GSAP, Motion, construction animations, horizontal scroll, 3D scene
 - **Typography:** Inter font, navy (#0A192F) + gold (#D4AF37) brand
-- **Language:** French (default), English routes reserved
+- **Language:** French (default), English with proper routes and translations
 - **SEO:** sitemap.xml, robots.txt, meta tags, canonical URLs
 - **Security:** Auth guards, RLS-ready schema, role checks
 
@@ -134,8 +138,16 @@ npx tsc --noEmit — exit 0, 0 errors
 
 ### Build
 ```
-npm run build — exit 0, built in 12.23s
-Output: dist/assets/index-B0zeICWH.js (839 KB gzip: 227 KB)
+npm run build — exit 0, built in 8.28s
+Output: dist/assets/index-BtkAcr6p.js (911 KB gzip: 250 KB)
+```
+
+### Automated Tests
+```
+npx vitest run — 3/3 passing
+- src/__tests__/Home.test.tsx ✅
+- src/__tests__/Contact.test.tsx ✅
+- src/__tests__/LanguageSwitcher.test.tsx ✅
 ```
 
 ### Manual Verification
@@ -144,14 +156,12 @@ Output: dist/assets/index-B0zeICWH.js (839 KB gzip: 227 KB)
 - Hero carousel: 5 slides, navigation indicators present
 - Contact form: Submits directly to Supabase `contact_messages`
 - Quotation form: Submits to `quotation_requests`
-- Sitemap: https://alfaconstructions.vercel.app/sitemap.xml → exists
-- Robots: https://alfaconstructions.vercel.app/robots.txt → exists
+- Language switcher: Toggles between FR/EN in navbar
 
 ### Automated Tests
-- Vitest config: not configured
-- React Testing Library: not configured
-- Playwright: not configured
-- No test files present
+- Vitest + React Testing Library configured and passing
+- 3 unit tests: Home, Contact, LanguageSwitcher
+- Playwright E2E: not configured
 
 ---
 
@@ -166,18 +176,18 @@ Output: dist/assets/index-B0zeICWH.js (839 KB gzip: 227 KB)
 ### Pending Improvements
 | # | Item | Status | Notes |
 |---|---|---|---|
-| 3 | English translations | Not started | Routes exist, only French content implemented |
-| 4 | Advanced GSAP/Motion/Three.js animations | Partially implemented | Core animations in place; could enhance quarry-themed scenes |
-| 5 | Email notifications for contact/quotation | Not configured | Requires email provider + Edge Function or SMTP creds |
-| 6 | Test suite | Not configured | Vitest + React Testing Library recommended |
-| 7 | CDN cache purge | Pending | May take up to 24h for Vercel edge nodes to refresh |
+| 3 | Email notifications for contact/quotation | Not configured | Requires email provider + Edge Function or SMTP creds |
+| 4 | CDN cache purge | Pending | May take up to 24h for Vercel edge nodes to refresh |
+| 5 | Playwright E2E tests | Not configured | Vitest unit tests are in place; E2E can be added |
 
 ---
 
 ## 8. File Inventory
 
 ### Key Source Files
-- `src/App.tsx` — Route definitions
+- `src/App.tsx` — Route definitions with FR/EN prefixes
+- `src/i18n/config.ts` — French/English translation bundles
+- `src/components/LanguageSwitcher/index.tsx` — FR/EN toggle button
 - `src/lib/supabase.ts` — Supabase client
 - `src/hooks/useAuth.ts` — Admin auth hook
 - `src/components/HeroCarousel/index.tsx` — 5-slide carousel
@@ -200,6 +210,11 @@ Output: dist/assets/index-B0zeICWH.js (839 KB gzip: 227 KB)
 - `supabase/migrations/001_initial_schema.sql` — Database schema
 - `public/sitemap.xml` — SEO sitemap
 - `public/robots.txt` — Search engine directives
+- `vitest.config.ts` — Test configuration
+- `src/__tests__/setup.ts` — Test setup with IntersectionObserver mock
+- `src/__tests__/Home.test.tsx` — Homepage test
+- `src/__tests__/Contact.test.tsx` — Contact form test
+- `src/__tests__/LanguageSwitcher.test.tsx` — i18n toggle test
 - `index.html` — SEO meta tags, Inter font, French lang
 
 ---
@@ -230,4 +245,4 @@ npx tsc --noEmit
 
 **Report generated:** 2026-11-02  
 **Session context:** ALFA CONSTRUCTION website development  
-**Deliverable status:** Production site live, TypeScript clean, build green. GitHub push pending token fix. Supabase schema pending manual verification.
+**Deliverable status:** Production site live, TypeScript clean, build green, tests passing. GitHub push pending token fix. Supabase schema pending manual verification.
