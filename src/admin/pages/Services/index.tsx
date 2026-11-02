@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { PenTool, Plus, Edit, Trash2, Eye, X, Save, Gateway, Globe, Shop } from 'lucide-react';
+import { PenTool, Plus, Edit, Trash2, Eye, X, Save, Gateway, Globe, FolderOpen } from 'lucide-react';
 
 export default function AdminServices() {
   const navigate = useNavigate();
@@ -82,7 +82,7 @@ export default function AdminServices() {
             {[...Array(4)].map((_, i) => <div key={i} className="bg-white/5 rounded-xl p-4 animate-pulse"><div className="h-4 bg-white/10 rounded mb-2"></div><div className="h-3 bg-white/10 rounded w-1/3"></div></div>)}
           </div>
         ) : services.length === 0 ? (
-          <div className="bg-white/5 rounded-xl p-8 text-center"><Shop className="w-12 h-12 text-white/20 mx-auto mb-4" /><p className="text-white/50">Aucun service pour le moment</p></div>
+          <div className="bg-white/5 rounded-xl p-8 text-center"><FolderOpen className="w-12 h-12 text-white/20 mx-auto mb-4" /><p className="text-white/50">Aucun service pour le moment</p></div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {services.map((s) => (

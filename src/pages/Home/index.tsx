@@ -5,13 +5,14 @@ import { ArrowRight, Landmark, MapPin, Mail, Building, Wrench, Route, Truck, Bui
 import { ScrollProgress, HeroScrollReveal } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
 import { HorizontalScrollBanner, Scroll3DScene, TestimonialsCarousel, ProjectPortfolio, ConstructionTimeline } from "@/components/advanced-animations";
+import HeroCarousel from "@/components/HeroCarousel";
 
 export default function Home() {
   const services = [
-    { icon: Building2, title: "Bâtiment", desc: "Construction de bâtiments résidentiels, commerciaux et industriels" },
-    { icon: Route, title: "Travaux publics", desc: "Routes, voies ferrées, digues et ouvrages d'assainissement" },
-    { icon: Truck, title: "Transport", desc: "Logistique, chantiers et livraisons régulières partout en Congo" },
-    { icon: Wrench, title: "Carrières", desc: "Extraction et commercialisation de granulats et matériaux" },
+    { icon: Wrench, title: "Exploitation de Carrières", desc: "Extraction et commercialisation de granulats et matériaux de construction", featured: true },
+    { icon: Building2, title: "Bâtiment & Travaux Publics", desc: "Construction de bâtiments résidentiels, commerciaux et industriels", featured: false },
+    { icon: Route, title: "Travaux Publics", desc: "Routes, voies ferrées, digues et ouvrages d'assainissement", featured: false },
+    { icon: Truck, title: "Transport & Logistique", desc: "Logistique, chantiers et livraisons régulières partout en Congo", featured: false },
   ];
 
   const stats = [
@@ -25,104 +26,7 @@ export default function Home() {
     <>
       <ScrollProgress />
 
-      <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0A192F] pt-16">
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A192F] via-[#14263F] to-[#1A2A3F]">
-            <AnimatedCrane className="absolute inset-0 w-full h-full opacity-[0.03]" />
-          </div>
-          <div className="absolute top-[10%] left-[8%] w-[50%] h-[50%] rounded-full bg-[#D4AF37]/5 blur-[140px]" />
-          <div className="absolute bottom-[15%] right-[10%] w-[45%] h-[45%] rounded-full bg-[#D4AF37]/4 blur-[120px]" />
-          <div className="absolute top-[50%] left-[50%] w-[35%] h-[35%] rounded-full bg-[#D4AF37]/3 blur-[100px]" />
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <div className="text-center lg:text-left">
-              <HeroScrollReveal className="mb-6">
-                <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-6 text-xs font-medium tracking-wide text-white/80">
-                  <Globe className="w-3.5 h-3.5 mr-2" />
-                  Entreprise de bâtiment &amp; travaux publics
-                </div>
-              </HeroScrollReveal>
-              
-              <HeroScrollReveal>
-                <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white" style={{ fontFamily: fontFamily.heading }}>
-                  Construisons l'avenir,
-                  <br />
-                  <span className="text-[#D4AF37]">un projet à la fois.</span>
-                </h1>
-              </HeroScrollReveal>
-              
-              <HeroScrollReveal>
-                <p className="mt-5 text-base sm:text-lg md:text-xl text-white/70 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-                  ALFA CONSTRUCTION est une entreprise de bâtiment, de travaux publics,
-                  de transport et de logistique basée en République du Congo.
-                  Nous construisons l'avenir, un projet à la fois.
-                </p>
-              </HeroScrollReveal>
-              
-              <HeroScrollReveal delay={200}>
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
-                  <Link to="/realisations">
-                    <Button variant="primary" size="lg" className="gap-2 min-w-[200px]">
-                      <Landmark className="w-4 h-4" /> Découvrir nos projets
-                      <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                  </Link>
-                  <Link to="/contact">
-                    <Button variant="outline" size="lg" className="min-w-[200px]">
-                      <Mail className="w-4 h-4" /> Demander un devis
-                    </Button>
-                  </Link>
-                </div>
-              </HeroScrollReveal>
-            </div>
-
-            <HeroScrollReveal delay={200}>
-              <div className="relative flex items-center justify-center h-full pt-8">
-                <div className="relative w-full max-w-lg mx-auto">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#0A192F] to-[#14263F] rounded-3xl shadow-2xl border border-white/10 p-2">
-                    <div className="relative bg-[#0A192F] rounded-2xl p-6 sm:p-8">
-                      <AnimatedCrane className="w-full h-auto opacity-70" />
-                      
-                      <div className="relative mt-6 grid grid-cols-2 gap-3">
-                        <div className="bg-[#0A192F]/80 backdrop-blur-md rounded-xl p-3 border border-white/10">
-                          <div className="text-2xl font-bold text-[#D4AF37]">15+</div>
-                          <div className="text-xs text-white/60 font-medium">ANNÉES D'EXPÉRIENCE</div>
-                        </div>
-                        <div className="bg-[#0A192F]/80 backdrop-blur-md rounded-xl p-3 border border-white/10">
-                          <div className="text-2xl font-bold text-[#D4AF37]">50+</div>
-                          <div className="text-xs text-white/60 font-medium">PROJETS REALISES</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="absolute -top-4 -right-4 bg-[#D4AF37] text-[#0A192F] rounded-full px-4 py-2 shadow-lg">
-                    <div className="text-2xl font-bold">15+</div>
-                  </div>
-                  
-                  <div className="absolute -bottom-4 -left-4 bg-[#0A192F] text-[#D4AF37] rounded-full px-4 py-2 shadow-lg border border-[#D4AF37]/20">
-                    <div className="text-2xl font-bold">50+</div>
-                  </div>
-                </div>
-                
-                <div className="flex gap-4 mt-6 justify-center">
-                  <AnimatedExcavator className="w-24 h-24 opacity-60" />
-                  <AnimatedDumpTruck className="w-24 h-24 opacity-60" />
-                  <AnimatedBuildingProgress className="w-24 h-24 opacity-60" />
-                </div>
-              </div>
-            </HeroScrollReveal>
-          </div>
-        </div>
-
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-1">
-            <div className="w-1 h-2 rounded-full bg-white/50 animate-pulse" />
-          </div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       <HorizontalScrollBanner className="mt-8" />
 

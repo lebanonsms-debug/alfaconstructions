@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { supabase } from '@/lib/supabase';
 import { MapPin, Phone, Mail, Building, Send } from 'lucide-react';
 
 const contactSchema = z.object({
@@ -42,17 +43,17 @@ export default function Contact() {
 
   const onSubmit = async (data: z.infer<typeof contactSchema>) => {
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+      const { error } = await supabase.from('contact_messages').insert({
+        name: data.name,
+        company: data.company || '',
+        email: data.email,
+        phone: data.phone || '',
+        subject: data.subject,
+        message: data.message,
       });
-      if (response.ok) {
-        reset();
-      } else {
-        const error = await response.json();
-        alert(error.message || 'Erreur lors de l\'envoi');
-      }
+      if (error) throw error;
+      reset();
+      alert('Message envoyé avec succès !');
     } catch {
       alert('Erreur de connexion. Veuillez réessayer.');
     }

@@ -5,28 +5,29 @@ import { Link } from 'react-router-dom';
 
 const services = [
   {
+    title: 'Exploitation de Carrières',
+    description: 'Extraction et commercialisation de granulats et matériaux de construction.',
+    icon: Landmark,
+    slug: 'carrieres',
+    featured: true,
+  },
+  {
     title: 'Bâtiment & Travaux Publics',
     description: 'Construction, terrassement, travaux publics et ouvrages en béton.',
     icon: Building,
-    slug: 'batiment-travaux-publics',
+    slug: 'batiment',
   },
   {
     title: 'Transport & Logistique',
     description: 'Transport de matériaux, logistique de chantier et gestion d\'équipements.',
     icon: Truck,
-    slug: 'transport-logistique',
+    slug: 'transport',
   },
   {
-    title: 'Exploitation de Carrières',
-    description: 'Extraction et commercialisation de granulats et matériaux de construction.',
-    icon: Landmark,
-    slug: 'exploitation-carrieres',
-  },
-  {
-    title: 'Bureau d\'Étude',
+    title: "Bureau d'Étude",
     description: 'Études techniques, préparation de projets et planification d\'ingénierie.',
     icon: FlaskConical,
-    slug: 'bureau-d-étude',
+    slug: 'bureau-etude',
   },
 ];
 
@@ -46,7 +47,7 @@ export default function Services() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {services.map((s) => (
-              <div key={s.slug} className="bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-colors">
+              <div key={s.slug} className={`bg-white/5 rounded-xl p-6 hover:bg-white/10 transition-colors ${s.featured ? 'ring-2 ring-[#D4AF37]/50' : ''}`}>
                 <div className="w-12 h-12 rounded-lg bg-[#D4AF37]/20 flex items-center justify-center mb-4">
                   <s.icon className="w-6 h-6 text-[#D4AF37]" />
                 </div>
