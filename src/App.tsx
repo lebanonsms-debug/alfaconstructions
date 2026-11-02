@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Layout } from '@/components/layout'
+import { useTranslation } from 'react-i18next'
+import { useEffect } from 'react'
 
 // Pages
 import Home from '@/pages/Home'
@@ -30,28 +32,63 @@ import AdminQuotations from '@/admin/pages/Quotations'
 import AdminSettings from '@/admin/pages/Settings'
 import AdminLogin from '@/admin/pages/Login'
 
+function LangRoute({ lang, children }: { lang: string; children: React.ReactNode }) {
+  const { i18n } = useTranslation();
+  useEffect(() => { i18n.changeLanguage(lang); }, [lang, i18n]);
+  return <>{children}</>;
+}
+
 function App() {
   return (
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
-        <Route path="/" element={<Layout><Home /></Layout>} />
-        <Route path="/apropos" element={<Layout><About /></Layout>} />
-        <Route path="/services" element={<Layout><Services /></Layout>} />
-        <Route path="/services/carrieres" element={<Layout><Carrieres /></Layout>} />
-        <Route path="/services/batiment" element={<Layout><Batiment /></Layout>} />
-        <Route path="/services/transport" element={<Layout><Transport /></Layout>} />
-        <Route path="/services/bureau-etude" element={<Layout><BureauEtude /></Layout>} />
-        <Route path="/realisations" element={<Layout><Projects /></Layout>} />
-        <Route path="/realisations/:slug" element={<Layout><ProjectDetail /></Layout>} />
-        <Route path="/plateforme-600" element={<Layout><Plateforme600 /></Layout>} />
-        <Route path="/devis" element={<Layout><Quotation /></Layout>} />
-        <Route path="/contact" element={<Layout><Contact /></Layout>} />
-        <Route path="/politique-confidentialite" element={<Layout noFooter><Privacy /></Layout>} />
-        <Route path="/mentions-legales" element={<Layout noFooter><Legal /></Layout>} />
-        <Route path="/faq" element={<Layout><Faq /></Layout>} />
+        {/* Root redirect to French */}
+        <Route path="/" element={<Navigate to="/fr/" replace />} />
+
+        {/* French routes */}
+        <Route path="/fr" element={<Navigate to="/fr/" replace />} />
+        <Route path="/fr/" element={
+          <LangRoute lang="fr"><Layout><Home /></Layout></LangRoute>
+        } />
+        <Route path="/fr/a-propos" element={<LangRoute lang="fr"><Layout><About /></Layout></LangRoute>} />
+        <Route path="/fr/services" element={<LangRoute lang="fr"><Layout><Services /></Layout></LangRoute>} />
+        <Route path="/fr/services/carrieres" element={<LangRoute lang="fr"><Layout><Carrieres /></Layout></LangRoute>} />
+        <Route path="/fr/services/batiment" element={<LangRoute lang="fr"><Layout><Batiment /></Layout></LangRoute>} />
+        <Route path="/fr/services/transport" element={<LangRoute lang="fr"><Layout><Transport /></Layout></LangRoute>} />
+        <Route path="/fr/services/bureau-etude" element={<LangRoute lang="fr"><Layout><BureauEtude /></Layout></LangRoute>} />
+        <Route path="/fr/realisations" element={<LangRoute lang="fr"><Layout><Projects /></Layout></LangRoute>} />
+        <Route path="/fr/realisations/:slug" element={<LangRoute lang="fr"><Layout><ProjectDetail /></Layout></LangRoute>} />
+        <Route path="/fr/plateforme-600" element={<LangRoute lang="fr"><Layout><Plateforme600 /></Layout></LangRoute>} />
+        <Route path="/fr/devis" element={<LangRoute lang="fr"><Layout><Quotation /></Layout></LangRoute>} />
+        <Route path="/fr/contact" element={<LangRoute lang="fr"><Layout><Contact /></Layout></LangRoute>} />
+        <Route path="/fr/politique-de-confidentialite" element={<LangRoute lang="fr"><Layout noFooter><Privacy /></Layout></LangRoute>} />
+        <Route path="/fr/mentions-legales" element={<LangRoute lang="fr"><Layout noFooter><Legal /></Layout></LangRoute>} />
+        <Route path="/fr/faq" element={<LangRoute lang="fr"><Layout><Faq /></Layout></LangRoute>} />
+
+        {/* English routes */}
+        <Route path="/en" element={<Navigate to="/en/" replace />} />
+        <Route path="/en/" element={
+          <LangRoute lang="en"><Layout><Home /></Layout></LangRoute>
+        } />
+        <Route path="/en/about" element={<LangRoute lang="en"><Layout><About /></Layout></LangRoute>} />
+        <Route path="/en/services" element={<LangRoute lang="en"><Layout><Services /></Layout></LangRoute>} />
+        <Route path="/en/services/quarry" element={<LangRoute lang="en"><Layout><Carrieres /></Layout></LangRoute>} />
+        <Route path="/en/services/building" element={<LangRoute lang="en"><Layout><Batiment /></Layout></LangRoute>} />
+        <Route path="/en/services/transport" element={<LangRoute lang="en"><Layout><Transport /></Layout></LangRoute>} />
+        <Route path="/en/services/engineering" element={<LangRoute lang="en"><Layout><BureauEtude /></Layout></LangRoute>} />
+        <Route path="/en/projects" element={<LangRoute lang="en"><Layout><Projects /></Layout></LangRoute>} />
+        <Route path="/en/projects/:slug" element={<LangRoute lang="en"><Layout><ProjectDetail /></Layout></LangRoute>} />
+        <Route path="/en/platform-600" element={<LangRoute lang="en"><Layout><Plateforme600 /></Layout></LangRoute>} />
+        <Route path="/en/quote" element={<LangRoute lang="en"><Layout><Quotation /></Layout></LangRoute>} />
+        <Route path="/en/contact" element={<LangRoute lang="en"><Layout><Contact /></Layout></LangRoute>} />
+        <Route path="/en/privacy" element={<LangRoute lang="en"><Layout noFooter><Privacy /></Layout></LangRoute>} />
+        <Route path="/en/legal" element={<LangRoute lang="en"><Layout noFooter><Legal /></Layout></LangRoute>} />
+        <Route path="/en/faq" element={<LangRoute lang="en"><Layout><Faq /></Layout></LangRoute>} />
+
+        {/* 404 */}
         <Route path="*" element={<Layout><NotFound /></Layout>} />
 
-        {/* Admin routes */}
+        {/* Admin routes (no language prefix) */}
         <Route path="/admin/login" element={<AdminLogin />} />
         <Route path="/admin" element={<AdminLayout><AdminDashboard /></AdminLayout>} />
         <Route path="/admin/projects" element={<AdminLayout><AdminProjects /></AdminLayout>} />

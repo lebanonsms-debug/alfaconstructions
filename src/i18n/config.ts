@@ -1,0 +1,182 @@
+import i18n from 'i18next';
+import { initReactI18next } from 'react-i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+
+const fr = {
+  translation: {
+    nav: {
+      home: 'Accueil',
+      about: 'À Propos',
+      services: 'Nos Services',
+      projects: 'Nos Réalisations',
+      contact: 'Contact',
+      quotation: 'Demander un devis',
+      language: 'English',
+    },
+    hero: {
+      slide1: 'L\'excellence au cœur de nos carrières.',
+      slide2: 'La puissance de l\'industrie et des grands projets.',
+      slide3: 'Des équipements performants pour vos ambitions.',
+      slide4: 'Construire aujourd\'hui, bâtir l\'avenir.',
+      slide5: 'Des solutions intégrées pour vos grands projets.',
+      cta: 'Découvrir nos services',
+      cta2: 'Nous contacter',
+    },
+    services: {
+      title: 'Nos Services',
+      carrieres: 'Exploitation de Carrières',
+      batiment: 'Bâtiment & Travaux Publics',
+      transport: 'Transport & Logistique',
+      bureau: 'Bureau d\'Étude',
+      featured: 'Service principal',
+      learnMore: 'En savoir plus',
+    },
+    about: {
+      title: 'À Propos',
+      intro: 'ALFA CONSTRUCTION est une entreprise basée en République du Congo, spécialisée dans l\'exploitation de carrières, le bâtiment, les travaux publics, le transport et le bureau d\'étude.',
+      mission: 'Notre mission',
+      missionText: 'Fournir des solutions complètes et durables dans le secteur de la construction et des carrières, avec un engagement fort envers la qualité, la sécurité et l\'environnement.',
+      vision: 'Notre vision',
+      visionText: 'Devenir le partenaire de référence en République du Congo pour les grands projets industriels et de construction.',
+      values: 'Nos valeurs',
+      valuesList: 'Qualité, Intégrité, Innovation, Sécurité, Durabilité',
+    },
+    contact: {
+      title: 'Contactez-nous',
+      name: 'Nom complet',
+      email: 'Email',
+      phone: 'Téléphone',
+      subject: 'Sujet',
+      message: 'Message',
+      send: 'Envoyer',
+      success: 'Message envoyé avec succès',
+      error: 'Erreur lors de l\'envoi',
+    },
+    quotation: {
+      title: 'Demande de devis',
+      company: 'Entreprise',
+      service: 'Service souhaité',
+      location: 'Lieu du projet',
+      description: 'Description du projet',
+      budget: 'Budget estimé',
+      dates: 'Dates souhaitées',
+      privacy: 'J\'accepte la politique de confidentialité',
+      submit: 'Envoyer la demande',
+      success: 'Demande envoyée avec succès',
+    },
+    footer: {
+      rights: 'Tous droits réservés',
+      address: 'Avenue Docteur Cardorelle, Songolo, Centre-Ville, Boulevard Charles de Gaulle, Immeuble Hôtel Elaïs, République du Congo',
+    },
+    admin: {
+      login: 'Connexion administrateur',
+      email: 'Email',
+      password: 'Mot de passe',
+      signIn: 'Se connecter',
+      error: 'Identifiants invalides',
+      dashboard: 'Tableau de bord',
+      projects: 'Projets',
+      services: 'Services',
+      media: 'Médias',
+      messages: 'Messages',
+      quotations: 'Devis',
+      settings: 'Paramètres',
+      logout: 'Déconnexion',
+    },
+  },
+};
+
+const en = {
+  translation: {
+    nav: {
+      home: 'Home',
+      about: 'About',
+      services: 'Services',
+      projects: 'Projects',
+      contact: 'Contact',
+      quotation: 'Request a quote',
+      language: 'Français',
+    },
+    hero: {
+      slide1: 'Excellence at the heart of our quarries.',
+      slide2: 'The power of industry and major projects.',
+      slide3: 'High-performance equipment for your ambitions.',
+      slide4: 'Building today, shaping tomorrow.',
+      slide5: 'Integrated solutions for your major projects.',
+      cta: 'Discover our services',
+      cta2: 'Contact us',
+    },
+    services: {
+      title: 'Our Services',
+      carrieres: 'Quarry Operations',
+      batiment: 'Building & Public Works',
+      transport: 'Transport & Logistics',
+      bureau: 'Engineering Office',
+      featured: 'Main service',
+      learnMore: 'Learn more',
+    },
+    about: {
+      title: 'About Us',
+      intro: 'ALFA CONSTRUCTION is a company based in the Republic of the Congo, specializing in quarry operations, building, public works, transport, and engineering.',
+      mission: 'Our mission',
+      missionText: 'To provide complete and sustainable solutions in construction and quarry operations, with a strong commitment to quality, safety, and the environment.',
+      vision: 'Our vision',
+      visionText: 'To become the reference partner in the Republic of the Congo for major industrial and construction projects.',
+      values: 'Our values',
+      valuesList: 'Quality, Integrity, Innovation, Safety, Sustainability',
+    },
+    contact: {
+      title: 'Contact Us',
+      name: 'Full name',
+      email: 'Email',
+      phone: 'Phone',
+      subject: 'Subject',
+      message: 'Message',
+      send: 'Send',
+      success: 'Message sent successfully',
+      error: 'Error sending message',
+    },
+    quotation: {
+      title: 'Request a quote',
+      company: 'Company',
+      service: 'Required service',
+      location: 'Project location',
+      description: 'Project description',
+      budget: 'Estimated budget',
+      dates: 'Desired dates',
+      privacy: 'I accept the privacy policy',
+      submit: 'Send request',
+      success: 'Request sent successfully',
+    },
+    footer: {
+      rights: 'All rights reserved',
+      address: 'Avenue Docteur Cardorelle, Songolo, Centre-Ville, Boulevard Charles de Gaulle, Immeuble Hôtel Elaïs, Republic of the Congo',
+    },
+    admin: {
+      login: 'Admin login',
+      email: 'Email',
+      password: 'Password',
+      signIn: 'Sign in',
+      error: 'Invalid credentials',
+      dashboard: 'Dashboard',
+      projects: 'Projects',
+      services: 'Services',
+      media: 'Media',
+      messages: 'Messages',
+      quotations: 'Quotations',
+      settings: 'Settings',
+      logout: 'Logout',
+    },
+  },
+};
+
+i18n
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources: { fr, en },
+    fallbackLng: 'fr',
+    interpolation: { escapeValue: false },
+  });
+
+export default i18n;

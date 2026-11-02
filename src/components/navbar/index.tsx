@@ -1,12 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
-import { Menu, X, ChevronDown } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { navItems, languages } from '@/config/brand'
+import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false)
 
   useState(() => {
     const handleScroll = () => {
@@ -15,6 +15,8 @@ export function Navbar() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   })
+
+  const prefix = typeof window !== 'undefined' && window.location.pathname.startsWith('/en') ? '/en' : '/fr';
 
   return (
     <header
@@ -26,7 +28,7 @@ export function Navbar() {
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2 group">
+        <Link to={`${prefix}/`} className="flex items-center gap-2 group">
           <span className="text-white font-bold text-xl sm:text-2xl tracking-tight">
             ALFA<span className="text-[#D4AF37]"> CONSTRUCTION</span>
           </span>
@@ -38,7 +40,7 @@ export function Navbar() {
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
-                  to={item.href}
+                  to={`${prefix}${item.href}`}
                   className="px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors flex items-center gap-1.5"
                 >
                   {item.icon && (
@@ -63,52 +65,12 @@ export function Navbar() {
           </ul>
 
           {/* Language Switcher */}
-          <div className="relative">
-            <button
-              onClick={() => setIsLanguageOpen(!isLanguageOpen)}
-              className="flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5h12M9 3v2c0 4.418-2.239 8-5 8M15 3v2c0 4.418-2.239 8-5 8M12 12v4m0 0h-4m4 0l-4-4m4 4v-4" />
-              </svg>
-              <ChevronDown
-                className={`w-4 h-4 text-white/50 transition-transform duration-200 ${
-                  isLanguageOpen ? 'rotate-180' : ''
-                }`}
-              />
-            </button>
-
-            {isLanguageOpen && (
-              <>
-                <div
-                  className="fixed inset-0 z-10"
-                  onClick={() => setIsLanguageOpen(false)}
-                />
-                <div className="absolute right-0 top-full mt-1 bg-white border border-[#E5E7EB] rounded-lg shadow-xl z-20 min-w-[140px]">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      onClick={() => {
-                        setIsLanguageOpen(false)
-                      }}
-                      className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                        lang.code === 'fr'
-                          ? 'bg-[#0A192F] text-white'
-                          : 'text-[#6B7280] hover:text-[#374151]'
-                      }`}
-                    >
-                      {lang.label}
-                    </button>
-                  ))}
-                </div>
-              </>
-            )}
-          </div>
+          <LanguageSwitcher />
 
           {/* CTA Buttons */}
           <div className="flex items-center gap-2">
             <Link
-              to="/contact"
+              to={`${prefix}/contact`}
               className="hidden sm:inline-flex items-center px-4 py-2 bg-[#D4AF37] text-[#0A192F] font-semibold text-sm rounded-md hover:bg-[#E8C94A] transition-colors"
             >
               Demander un devis
@@ -141,7 +103,7 @@ export function Navbar() {
             {navItems.map((item) => (
               <Link
                 key={item.href}
-                to={item.href}
+                to={`${prefix}${item.href}`}
                 className="flex items-center gap-3 px-3 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-md transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -163,8 +125,11 @@ export function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <div className="pt-2 border-t border-white/10">
+              <LanguageSwitcher />
+            </div>
             <Link
-              to="/contact"
+              to={`${prefix}/contact`}
               className="flex items-center justify-center gap-2 px-3 py-2.5 bg-[#D4AF37] text-[#0A192F] font-semibold rounded-md transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
@@ -192,14 +157,4 @@ function getIconPath(icon: string): string {
   // @ts-ignore - paths[icon] returns string | undefined but we'll always have a fallback
   const path = paths[icon] || paths.home;
   return path as string;
-}
-
-// Mobile menu button hook
-export function useMobileMenu() {
-  const [isOpen, setIsOpen] = useState(false)
-  return {
-    isOpen,
-    toggle: () => setIsOpen(!isOpen),
-    close: () => setIsOpen(false),
-  }
 }
