@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui";
 import { fontFamily } from "@/config/brand";
 import { ArrowRight, Landmark, MapPin, Mail, Building, Wrench, Route, Truck, Building2, Award, Users, Globe } from "lucide-react";
-import { ScrollProgress, HeroScrollReveal, AnimatedCrane } from "@/components/animation";
+import { HeroScrollReveal, AnimatedCrane } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
 import { HorizontalScrollBanner, Scroll3DScene, TestimonialsCarousel, ProjectPortfolio, ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
@@ -24,8 +24,6 @@ export default function Home() {
 
   return (
     <>
-      <ScrollProgress />
-
       <HeroCarousel />
 
       <HorizontalScrollBanner className="mt-8" />

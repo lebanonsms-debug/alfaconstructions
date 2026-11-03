@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { navItems, languages } from '@/config/brand'
+import { navItems } from '@/config/brand'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const location = useLocation()
 
   useState(() => {
     const handleScroll = () => {
@@ -16,7 +17,7 @@ export function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   })
 
-  const prefix = typeof window !== 'undefined' && window.location.pathname.startsWith('/en') ? '/en' : '/fr';
+  const prefix = location.pathname.startsWith('/en') ? '/en' : '/fr';
 
   return (
     <header

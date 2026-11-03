@@ -10,17 +10,17 @@
 
 ---
 
-## 1. GitHub Repository — ⚠️ BLOCKED
+## 1. GitHub Repository — ✅ LIVE
 
-**Status:** Source code committed locally but NOT pushed to GitHub.
+**Status:** Source code pushed to GitHub.
 
-**Reason:** The configured GitHub Personal Access Token lacks the `createRepository` scope. The repository `https://github.com/lebanonsms-debug/alfaconstructions.git` does not exist, and repo creation fails with:
-```
-GraphQL: Resource not accessible by personal access token (createRepository)
-```
+**Repository:** https://github.com/lebanonsms-debug/alfaconstructions
+
+**Latest commit:** `eac951d` docs: update completion report with vercel fix status
 
 **Commit history:**
 ```
+eac951d docs: update completion report with vercel fix status
 775cdc7 chore: update package-lock after installing test deps
 68d1b70 fix: add SPA rewrite rule to vercel.json for client-side routing
 a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
