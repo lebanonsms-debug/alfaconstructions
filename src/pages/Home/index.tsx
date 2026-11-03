@@ -31,9 +31,9 @@ export default function Home() {
 
       <HorizontalScrollBanner className="mt-8" />
 
-      <section className="py-16 sm:py-24 bg-[#0A192F]">
+      <section className="py-8 sm:py-12 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <HeroScrollReveal>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
                 {t("home.servicesTitle")}
@@ -49,15 +49,22 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, i) => (
               <HeroScrollReveal key={i}>
-                <div className="group relative h-full bg-[#14263F] rounded-xl p-6 sm:p-8 border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
-                  <div className="w-14 h-14 rounded-xl bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <service.icon className="w-7 h-7" />
+                <div className="group relative h-full bg-[#14263F] rounded-xl p-5 sm:p-6 border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
+                  <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                    <service.icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-white font-semibold text-lg mb-2">{service.title}</h3>
+                  <h3 className="text-white font-semibold text-base mb-2">{service.title}</h3>
                   <p className="text-sm text-white/60 leading-relaxed">{service.desc}</p>
                 </div>
               </HeroScrollReveal>
             ))}
+          </div>
+          <div className="mt-8 max-w-4xl mx-auto">
+            <HeroScrollReveal>
+              <div className="bg-[#14263F] rounded-xl p-4 sm:p-6 border border-white/5">
+                <AnimatedCrane className="w-full h-auto opacity-80" />
+              </div>
+            </HeroScrollReveal>
           </div>
         </div>
       </section>
