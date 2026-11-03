@@ -493,8 +493,6 @@ export function ConstructionTimeline() {
             ))}
           </div>
         </div>
-
-        <div className="hidden md:block absolute top-8 left-1/2 -translate-x-1/2 w-full h-0.5 bg-[#D4AF37]" />
       </div>
     </section>
   );
