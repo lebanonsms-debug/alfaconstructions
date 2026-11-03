@@ -1,13 +1,14 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
-import { navItems } from '@/config/brand'
+import { useTranslation } from 'react-i18next'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 
 export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const location = useLocation()
+  const { t, i18n } = useTranslation()
 
   useState(() => {
     const handleScroll = () => {
@@ -18,6 +19,14 @@ export function Navbar() {
   })
 
   const prefix = location.pathname.startsWith('/en') ? '/en' : '/fr';
+
+  const navItems = [
+    { label: t('nav.home'), href: `/${i18n.language}/`, icon: 'home' },
+    { label: t('nav.about'), href: `/${i18n.language}/a-propos`, icon: 'info' },
+    { label: t('nav.services'), href: `/${i18n.language}/services`, icon: 'services' },
+    { label: t('nav.projects'), href: `/${i18n.language}/realisations`, icon: 'grid' },
+    { label: t('nav.contact'), href: `/${i18n.language}/contact`, icon: 'mail' },
+  ]
 
   return (
     <header

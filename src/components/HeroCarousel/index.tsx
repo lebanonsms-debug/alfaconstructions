@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Slide {
   id: number;
@@ -11,55 +12,59 @@ interface Slide {
   ctaLink: string;
 }
 
-const slides: Slide[] = [
-  {
-    id: 1,
-    image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1920&q=80',
-    title: "L'excellence au cœur de nos carrières.",
-    subtitle: 'EXPLOITATION DE CARRIÈRES',
-    description: 'Leader dans l\'extraction et la production de granulats de haute qualité en République du Congo.',
-    ctaText: 'Découvrir nos services',
-    ctaLink: '/services',
-  },
-  {
-    id: 2,
-    image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80',
-    title: 'La puissance de l\'industrie et des grands projets.',
-    subtitle: 'INGÉNIERIE & CONSTRUCTION',
-    description: 'Des équipements performants et une expertise technique pour vos projets les plus ambitieux.',
-    ctaText: 'Nos réalisations',
-    ctaLink: '/realisations',
-  },
-  {
-    id: 3,
-    image: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1920&q=80',
-    title: 'Des équipements performants pour vos ambitions.',
-    subtitle: 'TRANSPORT & LOGISTIQUE',
-    description: 'Flotte moderne et logistique intégrée pour le transport de matériaux sur tout le territoire.',
-    ctaText: 'En savoir plus',
-    ctaLink: '/services',
-  },
-  {
-    id: 4,
-    image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80',
-    title: 'Construire aujourd\'hui, bâtir l\'avenir.',
-    subtitle: 'BÂTIMENT & TRAVAUX PUBLICS',
-    description: 'Projets de construction civile et travaux publics conformes aux normes internationales.',
-    ctaText: 'Nos projets',
-    ctaLink: '/realisations',
-  },
-  {
-    id: 5,
-    image: 'https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=1920&q=80',
-    title: 'Des solutions intégrées pour vos grands projets.',
-    subtitle: 'BUREAU D\'ÉTUDE',
-    description: 'Études techniques, faisabilité, planification et suivi d\'exécution par des experts.',
-    ctaText: 'Contactez-nous',
-    ctaLink: '/contact',
-  },
-];
+function getSlides(t: any) {
+  return [
+    {
+      id: 1,
+      image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1920&q=80',
+      title: t('hero.slide1'),
+      subtitle: 'EXPLOITATION DE CARRIÈRES',
+      description: t('hero.slide1Desc'),
+      ctaText: t('hero.cta'),
+      ctaLink: '/services',
+    },
+    {
+      id: 2,
+      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80',
+      title: t('hero.slide2'),
+      subtitle: 'INGÉNIERIE & CONSTRUCTION',
+      description: t('hero.slide2Desc'),
+      ctaText: t('hero.cta2'),
+      ctaLink: '/realisations',
+    },
+    {
+      id: 3,
+      image: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1920&q=80',
+      title: t('hero.slide3'),
+      subtitle: 'TRANSPORT & LOGISTIQUE',
+      description: t('hero.slide3Desc'),
+      ctaText: t('hero.cta'),
+      ctaLink: '/services',
+    },
+    {
+      id: 4,
+      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80',
+      title: t('hero.slide4'),
+      subtitle: 'BÂTIMENT & TRAVAUX PUBLICS',
+      description: t('hero.slide4Desc'),
+      ctaText: t('hero.cta2'),
+      ctaLink: '/realisations',
+    },
+    {
+      id: 5,
+      image: 'https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=1920&q=80',
+      title: t('hero.slide5'),
+      subtitle: "BUREAU D'ÉTUDE",
+      description: t('hero.slide5Desc'),
+      ctaText: t('hero.cta2'),
+      ctaLink: '/contact',
+    },
+  ];
+}
 
 export default function HeroCarousel() {
+  const { t, i18n } = useTranslation();
+  const slides = getSlides(t);
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);

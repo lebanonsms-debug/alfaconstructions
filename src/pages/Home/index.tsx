@@ -6,20 +6,23 @@ import { HeroScrollReveal, AnimatedCrane } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
 import { HorizontalScrollBanner, Scroll3DScene, TestimonialsCarousel, ProjectPortfolio, ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
+  const { t, i18n } = useTranslation();
+
   const services = [
-    { icon: Wrench, title: "Exploitation de Carrières", desc: "Extraction et commercialisation de granulats et matériaux de construction", featured: true },
-    { icon: Building2, title: "Bâtiment & Travaux Publics", desc: "Construction de bâtiments résidentiels, commerciaux et industriels", featured: false },
-    { icon: Route, title: "Travaux Publics", desc: "Routes, voies ferrées, digues et ouvrages d'assainissement", featured: false },
-    { icon: Truck, title: "Transport & Logistique", desc: "Logistique, chantiers et livraisons régulières partout en Congo", featured: false },
+    { icon: Wrench, title: t("services.carrieres"), desc: t("services.carrieresDesc"), featured: true },
+    { icon: Building2, title: t("services.batiment"), desc: t("services.batimentDesc"), featured: false },
+    { icon: Route, title: t("services.travauxPublics"), desc: t("services.travauxPublicsDesc"), featured: false },
+    { icon: Truck, title: t("services.transport"), desc: t("services.transportDesc"), featured: false },
   ];
 
   const stats = [
-    { value: "50+", label: "PROJETS REALISES" },
-    { value: "30+", label: "SERVICES DISPONIBLES" },
-    { value: "15+", label: "ANNÉES D'EXPÉRIENCE" },
-    { value: "100%", label: "PRESTATION CLIENT" },
+    { value: "50+", label: t("home.stats.projects") },
+    { value: "30+", label: t("home.stats.services") },
+    { value: "15+", label: t("home.stats.experience") },
+    { value: "100%", label: t("home.stats.client") },
   ];
 
   return (
@@ -33,13 +36,13 @@ export default function Home() {
           <div className="text-center mb-12">
             <HeroScrollReveal>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                NOS SERVICES
+                {t("home.servicesTitle")}
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                SERVICES &amp; COMPÉTENCES
+                {t("services.title")}
               </h2>
               <p className="text-white/60 text-base max-w-2xl mx-auto">
-                Des solutions complètes du concept à la livraison, adaptées à vos besoins
+                {t("home.servicesSubtitle")}
               </p>
             </HeroScrollReveal>
           </div>
@@ -83,13 +86,13 @@ export default function Home() {
           <div className="text-center mb-12">
             <HeroScrollReveal>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                NOS REALISATIONS
+                {t("home.realisationsTitle")}
               </div>
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                GALERIE DE PROJETS
+                {t("home.realisationsTitle")}
               </h2>
               <p className="text-white/60 text-base max-w-2xl mx-auto">
-                Nos réalisations récentes, de la conception à la livraison
+                {t("home.realisationsSubtitle")}
               </p>
             </HeroScrollReveal>
           </div>
@@ -111,30 +114,27 @@ export default function Home() {
             <HeroScrollReveal>
               <div>
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                  NOTRE MÉTHODE
+                  {t("home.methodTitle")}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                  NOTRE APPROCHE
+                  {t("home.methodTitle")}
                 </h2>
                 <p className="text-white/70 text-base leading-relaxed mb-4">
-                  Construire, c'est d'abord comprendre. Nous écoutons vos besoins,
-                  analysons votre site, puis concevons des solutions sur mesure.
+                  {t("home.methodText1")}
                 </p>
                 <p className="text-white/70 text-base leading-relaxed mb-6">
-                  De la bureau d'étude à la main-d'œuvre, chaque étape est planifiée
-                  pour garantir la qualité, la sécurité et la conformité aux normes
-                  internationales.
+                  {t("home.methodText2")}
                 </p>
                 <div className="flex flex-wrap gap-3">
-                  <Link to="/apropos">
+                  <Link to={`/${i18n.language}/a-propos`}>
                     <Button variant="primary" size="lg" className="gap-2">
-                      En savoir plus
+                      {t("home.learnMore")}
                       <ArrowRight className="w-4 h-4" />
                     </Button>
                   </Link>
-                  <Link to="/services">
+                  <Link to={`/${i18n.language}/services`}>
                     <Button variant="outline" size="lg">
-                      <Wrench className="w-4 h-4" /> Nos Services
+                      <Wrench className="w-4 h-4" /> {t("services.title")}
                     </Button>
                   </Link>
                 </div>
@@ -186,31 +186,30 @@ export default function Home() {
       <TestimonialsCarousel />
       <ConstructionTimeline />
 
-      <section className="py-16 sm:py-24 bg-[#14263F]">
+      <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <HeroScrollReveal>
             <div className="relative max-w-3xl mx-auto p-6 sm:p-10 rounded-2xl bg-[#0A192F]/50 border border-white/10 backdrop-blur-sm">
               <div className="text-center">
                 <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
                   <Mail className="w-3.5 h-3.5 mr-2" />
-                  CONTACTEZ-NOUS
+                  {t("contact.title")}
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                  PRÊT À COMMENCER VOTRE PROJET ?
+                  {t("home.contactTitle")}
                 </h2>
                 <p className="text-white/70 text-base mb-8 max-w-xl mx-auto">
-                  Notre équipe sera ravie de vous accompagner.
-                  Contactez-nous pour une consultation gratuite.
+                  {t("home.contactText")}
                 </p>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Link to="/contact">
+                  <Link to={`/${i18n.language}/contact`}>
                     <Button variant="primary" size="lg" className="gap-2 min-w-[220px]">
-                      <Mail className="w-4 h-4" /> Contactez-nous
+                      <Mail className="w-4 h-4" /> {t("contact.title")}
                     </Button>
                   </Link>
-                  <Link to="/apropos">
+                  <Link to={`/${i18n.language}/a-propos`}>
                     <Button variant="outline" size="lg" className="min-w-[220px]">
-                      En savoir plus
+                      {t("home.learnMore")}
                     </Button>
                   </Link>
                 </div>
