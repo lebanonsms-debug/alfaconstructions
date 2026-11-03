@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui";
 import { ArrowRight, Building2, HardHat, Ruler, CheckCircle } from "lucide-react";
-import { AnimatedBuildingProgress, AnimatedExcavator } from "@/components/construction-animations";
+import { AnimatedBuildingProgress, AnimatedExcavator, AnimatedBuildingConstruction } from "@/components/construction-animations";
 
 export default function Batiment() {
   return (
@@ -10,7 +10,7 @@ export default function Batiment() {
       {/* Split Hero */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Bâtiment */}
             <div>
               <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 mb-4">
@@ -48,6 +48,11 @@ export default function Batiment() {
                 </Button>
               </Link>
             </div>
+          </div>
+
+          {/* Animated Building Image */}
+          <div className="mt-8">
+            <AnimatedBuildingConstruction className="w-full h-auto" />
           </div>
         </div>
       </section>
