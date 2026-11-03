@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui";
 import { ArrowRight, Building2, HardHat, Ruler, CheckCircle } from "lucide-react";
+import { AnimatedBuildingProgress } from "@/components/construction-animations";
 
 export default function Batiment() {
   return (
@@ -38,6 +39,18 @@ export default function Batiment() {
                 <Button variant="outline" size="lg">Nos réalisations</Button>
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-16 sm:py-24 bg-[#0A192F]">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">Animation du projet</h2>
+            <p className="text-white/60 max-w-2xl mx-auto">Visualisation animée de l'avancement d'un projet de construction</p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <AnimatedBuildingProgress className="w-full h-auto" />
           </div>
         </div>
       </section>
