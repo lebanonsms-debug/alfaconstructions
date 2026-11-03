@@ -21,11 +21,11 @@ export function Navbar() {
   const prefix = location.pathname.startsWith('/en') ? '/en' : '/fr';
 
   const navItems = [
-    { label: t('nav.home'), href: `/${i18n.language}/`, icon: 'home' },
-    { label: t('nav.about'), href: `/${i18n.language}/a-propos`, icon: 'info' },
-    { label: t('nav.services'), href: `/${i18n.language}/services`, icon: 'services' },
-    { label: t('nav.projects'), href: `/${i18n.language}/realisations`, icon: 'grid' },
-    { label: t('nav.contact'), href: `/${i18n.language}/contact`, icon: 'mail' },
+    { label: t('nav.home'), href: '/', icon: 'home' },
+    { label: t('nav.about'), href: '/a-propos', icon: 'info' },
+    { label: t('nav.services'), href: '/services', icon: 'services' },
+    { label: t('nav.projects'), href: '/realisations', icon: 'grid' },
+    { label: t('nav.contact'), href: '/contact', icon: 'mail' },
   ]
 
   return (
