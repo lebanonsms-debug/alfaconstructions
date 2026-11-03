@@ -11,31 +11,31 @@ export function HorizontalScrollBanner({ className = '' }) {
 
   const slides = [
     {
-      image: "https://placehold.co/1600x800/0A192F/ffffff?text=Batiment",
+      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80",
       title: "Bâtiment",
       subtitle: "Construction de bâtiments résidentiels et commerciaux",
       color: "#18F37A",
     },
     {
-      image: "https://placehold.co/1600x800/0A192F/ffffff?text=Travaux+Publiques",
+      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80",
       title: "Travaux Publics",
       subtitle: "Routes, voies ferrées et ouvrages d'assainissement",
       color: "#D4AF37",
     },
     {
-      image: "https://placehold.co/1600x800/0A192F/ffffff?text=Carrieres",
+      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1600&q=80",
       title: "Carrières",
       subtitle: "Extraction et commercialisation de granulats",
       color: "#8B5A2B",
     },
     {
-      image: "https://placehold.co/1600x800/0A192F/ffffff?text=Transport+Logistique",
+      image: "https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1600&q=80",
       title: "Transport & Logistique",
       subtitle: "Chantiers et livraisons partout en Congo",
       color: "#3B82F6",
     },
     {
-      image: "https://placehold.co/1600x800/0A192F/ffffff?text=Genie+Civil",
+      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1600&q=80",
       title: "Génie Civil",
       subtitle: "Ouvrages d'art, digues et infrastructures",
       color: "#D4AF37",
@@ -66,6 +66,16 @@ export function HorizontalScrollBanner({ className = '' }) {
 
   return (
     <div ref={containerRef} className={className}>
+      <style>{`
+        @keyframes kenBurns {
+          0% { transform: scale(1); }
+          50% { transform: scale(1.08); }
+          100% { transform: scale(1); }
+        }
+        .slide-image {
+          animation: kenBurns 8s ease-in-out infinite;
+        }
+      `}</style>
       <div className="flex overflow-x-auto overflow-y-hidden scrollbar-hide">
         {slides.map((slide, index) => (
           <div
@@ -76,8 +86,8 @@ export function HorizontalScrollBanner({ className = '' }) {
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover transition-transform duration-700 ease-out"
-                style={{ transform: `scale(${1 + (index - activeIndex) * 0.15})` }}
+                className="w-full h-full object-cover slide-image"
+                style={{ animation: `kenBurns 8s ease-in-out infinite` }}
               />
               <div
                 className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/90 via-[#0A192F]/40 to-transparent"
