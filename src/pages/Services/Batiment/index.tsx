@@ -2,37 +2,49 @@ import { Link } from "react-router-dom";
 import { Layout } from "@/components/layout";
 import { Button } from "@/components/ui";
 import { ArrowRight, Building2, HardHat, Ruler, CheckCircle } from "lucide-react";
-import { AnimatedBuildingProgress } from "@/components/construction-animations";
+import { AnimatedBuildingProgress, AnimatedExcavator } from "@/components/construction-animations";
 
 export default function Batiment() {
   return (
     <Layout>
-      <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
-        <div className="absolute inset-0">
-          <img
-            src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80"
-            alt="Bâtiment"
-            className="w-full h-full object-cover opacity-40"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F]/90 via-[#0A192F]/70 to-transparent" />
-        </div>
+      {/* Split Hero */}
+      <section className="relative min-h-[40vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 mb-6">
-              <Building2 className="w-4 h-4 mr-2 text-[#D4AF37]" />
-              <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Bâtiment & Travaux Publics</span>
-            </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Construction de bâtiments et <span className="text-[#D4AF37]">travaux publics</span>
-            </h1>
-            <p className="text-base sm:text-lg text-white/80 mb-6 max-w-2xl">
-              Réalisation complète de projets de construction civile et travaux publics :
-              terrassement, fondations, structures, drainage et infrastructure.
-            </p>
-            <div className="flex flex-wrap gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Bâtiment */}
+            <div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 mb-4">
+                <Building2 className="w-3.5 h-3.5 mr-2 text-[#D4AF37]" />
+                <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Bâtiment</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                Construction de bâtiments
+              </h1>
+              <p className="text-sm text-white/70 mb-4 max-w-md">
+                Construction de bâtiments résidentiels, commerciaux et industriels.
+              </p>
               <Link to="/contact">
-                <Button variant="primary" size="md" className="gap-2">
+                <Button variant="primary" size="sm" className="gap-2">
                   Demander un devis <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+
+            {/* Travaux Publics */}
+            <div>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 mb-4">
+                <HardHat className="w-3.5 h-3.5 mr-2 text-[#D4AF37]" />
+                <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Travaux Publics</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                Routes, voies ferrées et ouvrages d'assainissement
+              </h2>
+              <p className="text-sm text-white/70 mb-4 max-w-md">
+                Infrastructures publiques, routes, ponts, assainissement et drainage.
+              </p>
+              <Link to="/contact">
+                <Button variant="outline" size="sm" className="gap-2">
+                  En savoir plus
                 </Button>
               </Link>
             </div>
@@ -40,24 +52,25 @@ export default function Batiment() {
         </div>
       </section>
 
-      {/* Animation */}
+      {/* Animations */}
       <section className="py-8 sm:py-12 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Avancement du projet</h2>
-            <p className="text-white/60 max-w-2xl mx-auto">Visualisation animée de l'avancement d'un projet de construction</p>
-          </div>
-          <div className="max-w-4xl mx-auto">
-            <AnimatedBuildingProgress className="w-full h-auto" />
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-bold text-white mb-4">Avancement Bâtiment</h3>
+              <AnimatedBuildingProgress className="w-full h-auto" />
+            </div>
+            <div>
+              <h3 className="text-xl font-bold text-white mb-4">Chantier Travaux Publics</h3>
+              <AnimatedExcavator className="w-full h-auto" />
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Expertises */}
       <section className="py-8 sm:py-12 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">Nos expertises</h2>
-          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {[
               { icon: Building2, title: "Bâtiments résidentiels", desc: "Construction de maisons individuelles, appartements et résidences." },
