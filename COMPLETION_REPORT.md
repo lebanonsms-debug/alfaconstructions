@@ -21,6 +21,8 @@ GraphQL: Resource not accessible by personal access token (createRepository)
 
 **Commit history:**
 ```
+775cdc7 chore: update package-lock after installing test deps
+68d1b70 fix: add SPA rewrite rule to vercel.json for client-side routing
 a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 6294cb2 fix: resolve TypeScript strict mode errors, add auth types, fix imports
 6490ff7 feat: add hero carousel, dedicated service pages, plateforme 600, admin auth, sitemap, robots.txt
@@ -38,10 +40,12 @@ a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 **URL:** https://alfaconstructions.vercel.app
 
 **Vercel project:** `alfaconstructions` (team: lebanon)  
-**Project ID:** `prj_kZx6YvzGvS0eRQD7JQUCM1Jhwb6p`
+**Project ID:** `prj_s4S1sBUi4Fvqr8gYFfjus8WW9DAt`  
+**Deployment ID:** `dpl_DLd5r1hU3v2yS5qsLXTCGLx9Fcmj`
 
-**Deployed:** Successfully linked and deployed via Vercel CLI.  
-**Known CDN caching issue:** Vercel edge nodes may serve cached files for up to 24 hours. Local `dist/` build is correct. If the site doesn't reflect latest changes immediately, contact Vercel support to force cache invalidation.
+**Deployed:** Successfully deployed via Vercel CLI with SPA rewrite rules.  
+**Production URL:** https://alfaconstructions.vercel.app (HTTP 200, React rendering confirmed)  
+**Fix applied:** Added `vercel.json` rewrites to serve `index.html` for all routes, resolving blank navy screen / 404 on `/fr/`, `/en/`, and other client-side routes.
 
 ---
 
@@ -177,8 +181,7 @@ npx vitest run — 3/3 passing
 | # | Item | Status | Notes |
 |---|---|---|---|
 | 3 | Email notifications for contact/quotation | Not configured | Requires email provider + Edge Function or SMTP creds |
-| 4 | CDN cache purge | Pending | May take up to 24h for Vercel edge nodes to refresh |
-| 5 | Playwright E2E tests | Not configured | Vitest unit tests are in place; E2E can be added |
+| 4 | Playwright E2E tests | Not configured | Vitest unit tests are in place; E2E can be added |
 
 ---
 
