@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { footerNavItems } from '@/config/brand'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
-import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle, Send } from 'lucide-react'
 
 export function Footer() {
   const { settings } = useSiteSettings()
@@ -51,6 +51,30 @@ export function Footer() {
 
   return (
     <footer className="bg-[#0A192F] border-t border-white/10">
+      {/* Creative CTA strip */}
+      <div className="bg-gradient-to-r from-[#D4AF37]/10 via-[#0A192F] to-[#D4AF37]/10 border-y border-white/10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div>
+              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Prêt à commencer votre projet ?</h3>
+              <p className="text-white/60 text-base max-w-xl">
+                Discutons de vos besoins en génie civil, bâtiment et travaux publics.
+              </p>
+            </div>
+            <div className="flex items-center gap-3">
+              <a href={whatsappLink || '#'} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all hover:scale-105">
+                <MessageCircle className="w-5 h-5" />
+                WhatsApp
+              </a>
+              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-[#D4AF37] hover:bg-[#E8C94A] text-[#0A192F] font-semibold rounded-xl transition-all hover:scale-105">
+                <Send className="w-5 h-5" />
+                Nous contacter
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Brand + Social */}
@@ -70,7 +94,7 @@ export function Footer() {
                   href={link.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/50 hover:text-[#D4AF37] transition-colors"
+                  className="w-10 h-10 rounded-xl bg-white/5 hover:bg-[#D4AF37]/20 text-white/60 hover:text-[#D4AF37] flex items-center justify-center transition-all"
                   aria-label={link.ariaLabel}
                 >
                   {socialIcon(link.icon)}
@@ -83,12 +107,9 @@ export function Footer() {
           <div>
             <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Navigation</h3>
             <ul className="space-y-2.5 text-sm text-white/60">
-              {footerNavItems.map((item) => (
+              {footerNavItems.slice(0, 5).map((item) => (
                 <li key={item.href}>
-                  <Link
-                    to={item.href}
-                    className="hover:text-white transition-colors"
-                  >
+                  <Link to={item.href} className="hover:text-white transition-colors">
                     {item.label}
                   </Link>
                 </li>
@@ -96,8 +117,19 @@ export function Footer() {
             </ul>
           </div>
 
+          {/* Services */}
+          <div>
+            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Services</h3>
+            <ul className="space-y-2.5 text-sm text-white/60">
+              <li className="hover:text-white transition-colors">Bâtiment & Travaux Publics</li>
+              <li className="hover:text-white transition-colors">Transport & Logistique</li>
+              <li className="hover:text-white transition-colors">Carrière de pierres</li>
+              <li className="hover:text-white transition-colors">Bureau d'Étude</li>
+            </ul>
+          </div>
+
           {/* Contact */}
-          <div className="lg:col-span-2">
+          <div>
             <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h3>
             <ul className="space-y-3 text-sm text-white/60">
               <li className="flex items-start gap-3">
@@ -112,6 +144,14 @@ export function Footer() {
                 <Mail className="w-4 h-4 text-[#D4AF37]" />
                 <a href="mailto:ali-safa@alfa-constructions.com" className="hover:text-white transition-colors">ali-safa@alfa-constructions.com</a>
               </li>
+              {whatsappLink && (
+                <li className="flex items-center gap-3">
+                  <MessageCircle className="w-4 h-4 text-[#D4AF37]" />
+                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                    WhatsApp
+                  </a>
+                </li>
+              )}
             </ul>
           </div>
         </div>
@@ -127,19 +167,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-
-      {/* Floating WhatsApp Button */}
-      {whatsappLink && (
-        <a
-          href={whatsappLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110"
-          aria-label="WhatsApp"
-        >
-          <MessageCircle className="w-6 h-6" />
-        </a>
-      )}
     </footer>
   )
 }
