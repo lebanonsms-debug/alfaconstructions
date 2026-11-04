@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { footerNavItems } from '@/config/brand'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
-import { Mail, Phone, MapPin, MessageCircle, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 
 export function Footer() {
   const { settings } = useSiteSettings()
@@ -66,10 +66,6 @@ export function Footer() {
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </a>
-              <Link to="/contact" className="inline-flex items-center gap-2 px-6 py-3 bg-[#D4AF37] hover:bg-[#E8C94A] text-[#0A192F] font-semibold rounded-xl transition-all hover:scale-105">
-                <Send className="w-5 h-5" />
-                Nous contacter
-              </Link>
             </div>
           </div>
         </div>
