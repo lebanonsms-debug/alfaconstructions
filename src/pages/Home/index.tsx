@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui";
 import { fontFamily } from "@/config/brand";
-import { ArrowRight, Mail, Building, Wrench, Route, Truck, Building2, Award, Users, Globe } from "lucide-react";
-import { HeroScrollReveal, AnimatedCrane } from "@/components/animation";
+import { Mail } from "lucide-react";
+import { HeroScrollReveal } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
-import { HorizontalScrollBanner, TestimonialsCarousel, ConstructionTimeline } from "@/components/advanced-animations";
+import { ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
 import { useCmsCategories } from "@/hooks/useCms";
@@ -94,50 +94,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 bg-[#14263F]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <HeroScrollReveal>
-              <div>
-                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                  {t("home.methodTitle")}
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                  {t("home.methodTitle")}
-                </h2>
-                <p className="text-white/70 text-base leading-relaxed mb-4">
-                  {t("home.methodText1")}
-                </p>
-                <p className="text-white/70 text-base leading-relaxed mb-6">
-                  {t("home.methodText2")}
-                </p>
-                <div className="flex flex-wrap gap-3">
-                  <Link to={`/${i18n.language}/a-propos`}>
-                    <Button variant="primary" size="lg" className="gap-2">
-                      {t("home.learnMore")}
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
-                  <Link to={`/${i18n.language}/services`}>
-                    <Button variant="outline" size="lg">
-                      <Wrench className="w-4 h-4" /> {t("services.title")}
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </HeroScrollReveal>
-            <HeroScrollReveal delay={150}>
-              <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/10 to-[#0A192F] rounded-3xl" />
-                <div className="relative bg-[#0A192F] rounded-3xl p-4 sm:p-6">
-                  <AnimatedCrane className="w-full h-auto opacity-50" />
-                </div>
-              </div>
-            </HeroScrollReveal>
-          </div>
-        </div>
-      </section>
-
       <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -169,7 +125,6 @@ export default function Home() {
         </div>
       </section>
 
-      <TestimonialsCarousel />
       <ConstructionTimeline />
 
       <section className="py-16 sm:py-24 bg-[#0A192F]">
