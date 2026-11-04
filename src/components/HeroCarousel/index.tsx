@@ -9,8 +9,6 @@ interface Slide {
   title: string;
   subtitle: string;
   description: string;
-  ctaText: string;
-  ctaLink: string;
 }
 
 function getDefaultSlides(t: any): Slide[] {
@@ -21,8 +19,6 @@ function getDefaultSlides(t: any): Slide[] {
       title: t('hero.slide1'),
       subtitle: 'EXPLOITATION DE CARRIÈRES',
       description: t('hero.slide1Desc'),
-      ctaText: t('hero.cta'),
-      ctaLink: '/services',
     },
     {
       id: 2,
@@ -30,8 +26,6 @@ function getDefaultSlides(t: any): Slide[] {
       title: t('hero.slide2'),
       subtitle: 'INGÉNIERIE & CONSTRUCTION',
       description: t('hero.slide2Desc'),
-      ctaText: t('hero.cta2'),
-      ctaLink: '/realisations',
     },
     {
       id: 3,
@@ -39,8 +33,6 @@ function getDefaultSlides(t: any): Slide[] {
       title: t('hero.slide3'),
       subtitle: 'TRANSPORT & LOGISTIQUE',
       description: t('hero.slide3Desc'),
-      ctaText: t('hero.cta'),
-      ctaLink: '/services',
     },
     {
       id: 4,
@@ -48,8 +40,6 @@ function getDefaultSlides(t: any): Slide[] {
       title: t('hero.slide4'),
       subtitle: 'BÂTIMENT & TRAVAUX PUBLICS',
       description: t('hero.slide4Desc'),
-      ctaText: t('hero.cta2'),
-      ctaLink: '/realisations',
     },
     {
       id: 5,
@@ -57,8 +47,6 @@ function getDefaultSlides(t: any): Slide[] {
       title: t('hero.slide5'),
       subtitle: "BUREAU D'ÉTUDE",
       description: t('hero.slide5Desc'),
-      ctaText: t('hero.cta2'),
-      ctaLink: '/contact',
     },
   ];
 }
@@ -71,8 +59,6 @@ function mapCmsSlideToSlide(slide: any, lang: string): Slide {
     title: isFr ? (slide.title_fr || '') : (slide.title_en || ''),
     subtitle: isFr ? (slide.title_fr || '').toUpperCase() : (slide.title_en || '').toUpperCase(),
     description: isFr ? (slide.description_fr || '') : (slide.description_en || ''),
-    ctaText: isFr ? 'Nous contacter' : 'Contact us',
-    ctaLink: '/contact',
   };
 }
 
@@ -199,15 +185,6 @@ export default function HeroCarousel() {
                 <p className="text-lg sm:text-xl text-white/80 mb-8 max-w-2xl">
                   {slide.description}
                 </p>
-                <a
-                  href={slide.ctaLink}
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-[#D4AF37] text-[#0A192F] font-bold rounded-lg hover:bg-[#E8C94A] transition-colors text-lg"
-                >
-                  {slide.ctaText}
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
               </div>
             </div>
           </div>
