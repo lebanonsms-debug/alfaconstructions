@@ -83,7 +83,7 @@ export function Navbar() {
               to={`${prefix}/contact`}
               className="hidden sm:inline-flex items-center px-4 py-2 bg-[#D4AF37] text-[#0A192F] font-semibold text-sm rounded-md hover:bg-[#E8C94A] transition-colors"
             >
-              Demander un devis
+              Nous contacter
             </Link>
             <button className="sm:hidden p-2 text-white hover:bg-white/10 rounded-md transition-colors">
               <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -143,7 +143,7 @@ export function Navbar() {
               className="flex items-center justify-center gap-2 px-3 py-2.5 bg-[#D4AF37] text-[#0A192F] font-semibold rounded-md transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Demander un devis
+              Nous contacter
             </Link>
           </div>
         </div>

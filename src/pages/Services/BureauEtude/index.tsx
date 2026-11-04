@@ -32,7 +32,7 @@ export default function BureauEtude() {
             <div className="flex flex-wrap gap-3">
               <Link to="/contact">
                 <Button variant="primary" size="md" className="gap-2">
-                  Demander un devis <ArrowRight className="w-4 h-4" />
+                  Nous contacter <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
             </div>

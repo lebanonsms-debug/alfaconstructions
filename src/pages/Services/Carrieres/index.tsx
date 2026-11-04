@@ -11,7 +11,7 @@ export default function Carrieres() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1920&q=80"
+            src="/images/hero-excavators.png"
             alt="Carrière"
             className="w-full h-full object-cover opacity-40"
           />
@@ -21,19 +21,19 @@ export default function Carrieres() {
           <div className="max-w-3xl">
             <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-[#D4AF37]/20 border border-[#D4AF37]/30 mb-6">
               <Mountain className="w-4 h-4 mr-2 text-[#D4AF37]" />
-              <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Exploitation de Carrières</span>
+              <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Carrière de pierres</span>
             </div>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
-              Leader dans l'extraction et la production de <span className="text-[#D4AF37]">granulats</span>
+              Extraction et production de <span className="text-[#D4AF37]">pierres et granulats</span>
             </h1>
             <p className="text-base sm:text-lg text-white/80 mb-6 max-w-2xl">
-              Exploitation et gestion de carrières, approvisionnement en matériaux de construction,
+              Exploitation et gestion de carrière de pierres, approvisionnement en matériaux de construction,
               défrichage et production de granulats de haute qualité pour tous vos projets.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/contact">
                 <Button variant="primary" size="md" className="gap-2">
-                  Demander un devis <ArrowRight className="w-4 h-4" />
+                  Nous contacter <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
             </div>

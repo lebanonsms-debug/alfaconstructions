@@ -4,9 +4,27 @@ import { Button } from '@/components/ui';
 import { Landmark, MapPin, ArrowRight } from 'lucide-react';
 
 const featuredProjects = [
-  { title: 'Plateforme 600', location: 'République du Congo', slug: 'plateforme-600' },
-  { title: 'Route d\'accès', location: 'Centre-Ville', slug: 'route-accès' },
-  { title: 'Carrière de granulats', location: 'Kimbangu', slug: 'carriere-granulats' },
+  {
+    title: "Plateforme 600",
+    location: "République du Congo",
+    description: "Aménagement de la plateforme 600 et ses voies d'accès — travaux de terrassement, topographie, fondations et infrastructures.",
+    image: "/images/project-plateforme-600.png",
+    slug: "plateforme-600",
+  },
+  {
+    title: "Travaux de terrassement",
+    location: "Plateforme 600",
+    description: "Désherbage, décapage de terre végétale et préparation du terrain pour construction industrielle.",
+    image: "/images/project-earthworks.png",
+    slug: "terrassement",
+  },
+  {
+    title: "Ouvrages hydrauliques",
+    location: "Plateforme 600",
+    description: "Construction de caniveaux, bourbiers et systèmes de drainage pour la gestion des eaux.",
+    image: "/images/project-drainage.png",
+    slug: "hydraulique",
+  },
 ];
 
 export default function Projects() {
@@ -23,12 +41,19 @@ export default function Projects() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {featuredProjects.map((p) => (
-              <div key={p.slug} className="group cursor-pointer">
-                <div className="relative overflow-hidden rounded-xl h-48 sm:h-56 bg-[#2A3F5F] flex items-center justify-center">
-                  <Landmark className="w-12 h-12 text-white/30" />
-                  <div className="absolute inset-0 bg-[#D4AF37]/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+              <div
+                key={p.slug}
+                className="group bg-white/5 rounded-2xl overflow-hidden border border-white/10 hover:border-[#D4AF37]/50 transition-all duration-300"
+              >
+                <div className="relative h-56 sm:h-64 overflow-hidden">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F]/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
                     <Link to={`/realisations/${p.slug}`}>
                       <span className="px-4 py-2 bg-[#D4AF37] text-[#0A192F] rounded-lg text-sm font-medium">
                         Voir le projet
@@ -36,12 +61,13 @@ export default function Projects() {
                     </Link>
                   </div>
                 </div>
-                <div className="mt-3">
-                  <h3 className="text-white font-semibold text-lg">{p.title}</h3>
-                  <p className="text-sm text-white/50 flex items-center gap-1.5 mt-1">
+                <div className="p-5">
+                  <h3 className="text-white font-semibold text-lg mb-2">{p.title}</h3>
+                  <p className="text-white/50 text-sm flex items-center gap-1.5 mb-3">
                     <MapPin className="w-3 h-3" />
                     {p.location}
                   </p>
+                  <p className="text-white/60 text-sm leading-relaxed">{p.description}</p>
                 </div>
               </div>
             ))}

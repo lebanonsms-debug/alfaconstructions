@@ -142,12 +142,12 @@ export const sectors: Sector[] = [
   },
   {
     id: 'carrieres',
-    label: 'Exploitation de Carrières',
-    labelEn: 'Quarry Operations',
+    label: 'Carrière de pierres',
+    labelEn: 'Stone Quarry',
     description:
-      'Exploitation et gestion de carrières, approvisionnement en matériaux de construction, défrichage et production de granulats.',
+      'Exploitation et gestion de carrière de pierres, approvisionnement en matériaux de construction, défrichage et production de granulats.',
     descriptionEn:
-      'Quarry extraction, flow-management, supply of construction materials, clearing and aggregate production.',
+      'Stone quarry extraction, flow-management, supply of construction materials, clearing and aggregate production.',
     icon: 'mine',
   },
   {

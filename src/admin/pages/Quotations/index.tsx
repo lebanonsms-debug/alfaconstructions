@@ -115,8 +115,6 @@ export default function AdminQuotations() {
                     </div>
                     <p className="text-sm text-white/60 mb-1">{q.project_description}</p>
                     <p className="text-xs text-white/40">{q.project_location}</p>
-                    {q.estimated_budget && <p className="text-xs text-white/40 mt-1">Budget estimé : {q.estimated_budget}</p>
-                    }
                     <p className="text-xs text-white/40 mt-2">{new Date(q.created_at).toLocaleString('fr-FR')}</p>
                   </div>
                   <div className="flex gap-1 shrink-0">
@@ -142,7 +140,6 @@ export default function AdminQuotations() {
                 <input type="text" placeholder="Téléphone" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} className="w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
                 <input type="text" placeholder="Localisation du projet" value={formData.project_location} onChange={(e) => setFormData({ ...formData, project_location: e.target.value })} className="w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
                 <textarea placeholder="Description du projet" value={formData.project_description} onChange={(e) => setFormData({ ...formData, project_description: e.target.value })} className="w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37] min-h-[80px]" />
-                <input type="text" placeholder="Budget estimé" value={formData.estimated_budget} onChange={(e) => setFormData({ ...formData, estimated_budget: e.target.value })} className="w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]" />
                 <div className="flex gap-2 justify-end mt-4">
                   <Button variant="outline" onClick={() => setShowModal(false)}>Annuler</Button>
                   <Button variant="primary" onClick={handleSave}>{editingId ? 'Mettre à jour' : 'Envoyer'}</Button>

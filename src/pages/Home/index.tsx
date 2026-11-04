@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui";
 import { fontFamily } from "@/config/brand";
-import { ArrowRight, Landmark, MapPin, Mail, Building, Wrench, Route, Truck, Building2, Award, Users, Globe } from "lucide-react";
+import { ArrowRight, Mail, Building, Wrench, Route, Truck, Building2, Award, Users, Globe } from "lucide-react";
 import { HeroScrollReveal, AnimatedCrane } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
-import { HorizontalScrollBanner, Scroll3DScene, TestimonialsCarousel, ProjectPortfolio, ConstructionTimeline } from "@/components/advanced-animations";
+import { HorizontalScrollBanner, TestimonialsCarousel, ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
 
@@ -84,33 +84,6 @@ export default function Home() {
                 </div>
               </HeroScrollReveal>
             ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="py-16 sm:py-24 bg-[#0A192F]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <HeroScrollReveal>
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                {t("home.realisationsTitle")}
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                {t("home.realisationsTitle")}
-              </h2>
-              <p className="text-white/60 text-base max-w-2xl mx-auto">
-                {t("home.realisationsSubtitle")}
-              </p>
-            </HeroScrollReveal>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <HeroScrollReveal>
-              <Scroll3DScene />
-            </HeroScrollReveal>
-            <HeroScrollReveal delay={150}>
-              <ProjectPortfolio />
-            </HeroScrollReveal>
           </div>
         </div>
       </section>

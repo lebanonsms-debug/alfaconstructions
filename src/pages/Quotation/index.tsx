@@ -19,7 +19,6 @@ const quotationSchema = z.object({
   service: z.string().min(1, 'Veuillez sélectionner un service'),
   projectLocation: z.string().min(3, 'La localisation du projet est requise').max(200),
   projectDescription: z.string().min(10, 'La description doit contenir au moins 10 caractères').max(5000),
-  estimatedBudget: z.string().max(50).optional(),
   desiredStartDate: z.string().max(50).optional(),
   privacyConsent: z.boolean().refine((val) => val === true, {
     message: 'Vous devez accepter les conditions de confidentialité',
@@ -42,7 +41,6 @@ export default function Quotation() {
       service: '',
       projectLocation: '',
       projectDescription: '',
-      estimatedBudget: '',
       desiredStartDate: '',
       privacyConsent: false,
     },
@@ -66,7 +64,6 @@ export default function Quotation() {
         service_id: data.service,
         project_location: data.projectLocation,
         project_description: data.projectDescription,
-        estimated_budget: data.estimatedBudget || '',
         desired_start_date: data.desiredStartDate || '',
       });
       if (error) throw error;
@@ -87,7 +84,7 @@ export default function Quotation() {
               <span className="text-xs font-bold tracking-widest text-[#D4AF37] uppercase">Devis gratuit</span>
             </div>
             <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Demander un devis
+              Demande de renseignements
             </h1>
             <p className="text-white/60 text-lg max-w-2xl mx-auto">
               Décrivez votre projet et recevez une proposition personnalisée sous 48h.
@@ -144,11 +141,6 @@ export default function Quotation() {
                 />
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Input
-                    label="Budget estimé (optionnel)"
-                    {...register('estimatedBudget')}
-                    error={errors.estimatedBudget?.message}
-                  />
                   <Input
                     label="Date de début souhaitée (optionnel)"
                     type="date"

@@ -11,31 +11,31 @@ export function HorizontalScrollBanner({ className = '' }) {
 
   const slides = [
     {
-      image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80",
+      image: "/images/hero-construction-fleet.png",
       title: "Bâtiment",
       subtitle: "Construction de bâtiments résidentiels et commerciaux",
       color: "#18F37A",
     },
     {
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80",
+      image: "/images/hero-earthworks.png",
       title: "Travaux Publics",
       subtitle: "Routes, voies ferrées et ouvrages d'assainissement",
       color: "#D4AF37",
     },
     {
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1600&q=80",
-      title: "Carrières",
-      subtitle: "Extraction et commercialisation de granulats",
+      image: "/images/hero-excavators.png",
+      title: "Carrière de pierres",
+      subtitle: "Extraction et commercialisation de pierres et granulats",
       color: "#8B5A2B",
     },
     {
-      image: "https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1600&q=80",
+      image: "/images/hero-concrete.png",
       title: "Transport & Logistique",
       subtitle: "Chantiers et livraisons partout en Congo",
       color: "#3B82F6",
     },
     {
-      image: "https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1600&q=80",
+      image: "/images/hero-grader.png",
       title: "Génie Civil",
       subtitle: "Ouvrages d'art, digues et infrastructures",
       color: "#D4AF37",
@@ -313,9 +313,8 @@ export function ProjectPortfolio() {
       title: "Plateforme 600",
       category: "Bâtiment",
       location: "République du Congo",
-      desc: "Aménagement complet avec terrassement, coulage de béton, finitions revigorantes.",
+      desc: "Aménagement complet avec terrassement, coulage de béton, finitions.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Plateforme+600",
-      budget: "12M FCFA+",
       tags: ["bâtiment", "terrassement", "béton"],
     },
     {
@@ -325,18 +324,16 @@ export function ProjectPortfolio() {
       location: "Centre-Ville",
       desc: "Réhabilitation d'artère urbaine avec poses de chaussée et ouvrages d'assainissement.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Route+d'accès",
-      budget: "8M FCFA+",
       tags: ["route", "chaussée", "assainissement"],
     },
     {
       id: 3,
-      title: "Carrière de granulats",
+      title: "Carrière de pierres",
       category: "Carrières",
       location: "Kimbangu",
-      desc: "Exploitation de granulats avec extraction, tri et commercialisation des matériaux.",
+      desc: "Exploitation de pierres avec extraction, tri et commercialisation des matériaux.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Carriere",
-      budget: "5M FCFA+",
-      tags: ["carrière", "granulats", "extraction"],
+      tags: ["carrière", "pierres", "extraction"],
     },
     {
       id: 4,
@@ -345,7 +342,6 @@ export function ProjectPortfolio() {
       location: "Brazzaville",
       desc: "Construction et couverture d'un marché intérieur avec sanitation moderne.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Marché+Brazzaville",
-      budget: "20M FCFA+",
       tags: ["marché", "commercial", "bâtiment"],
     },
     {
@@ -355,7 +351,6 @@ export function ProjectPortfolio() {
       location: "Kintélé",
       desc: "Construction d'un viaduc ferroviaire pour améliorer la connectivité régionale.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Viaduc+Kintélé",
-      budget: "50M FCFA+",
       tags: ["viaduc", "ferroviaire", "infrastructure"],
     },
     {
@@ -365,7 +360,6 @@ export function ProjectPortfolio() {
       location: " Pointe-Noire",
       desc: "Complexe industriel avec hangars, ateliers et zones de stockage.",
       image: "https://placehold.co/600x400/0A192F/ffffff?text=Complexe+Industriel",
-      budget: "80M FCFA+",
       tags: ["industrie", "complexe", "logistique"],
     },
   ];
@@ -414,7 +408,7 @@ export function ProjectPortfolio() {
                   </div>
                 </div>
                 <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-[#D4AF37]/90 text-[#0A192F] text-xs font-medium">
-                  {p.budget}
+                  {p.category}
                 </div>
               </div>
               <div className="p-4 sm:p-6">

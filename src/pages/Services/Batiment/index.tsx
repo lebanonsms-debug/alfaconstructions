@@ -25,7 +25,7 @@ export default function Batiment() {
               </p>
               <Link to="/contact">
                 <Button variant="primary" size="sm" className="gap-2">
-                  Demander un devis <ArrowRight className="w-4 h-4" />
+                  Nous contacter <ArrowRight className="w-4 h-4" />
                 </Button>
               </Link>
             </div>

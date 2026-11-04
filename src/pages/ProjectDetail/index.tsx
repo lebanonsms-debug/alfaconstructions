@@ -92,7 +92,7 @@ export default function ProjectDetail() {
               </div>
               <a href="/contact">
                 <Button variant="primary" size="sm">
-                  Demander un devis
+                  Nous contacter
                 </Button>
               </a>
             </div>
