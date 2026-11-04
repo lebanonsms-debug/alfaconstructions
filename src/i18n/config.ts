@@ -33,6 +33,7 @@ const fr = {
       batiment: 'Bâtiment & Travaux Publics',
       transport: 'Transport & Logistique',
       bureau: "Bureau d'Étude",
+      rigMontage: 'Montage et mise en place du Rig',
       featured: 'Service principal',
       learnMore: 'En savoir plus',
       carrieresDesc: 'Extraction et commercialisation de pierres et granulats',
@@ -40,6 +41,7 @@ const fr = {
       travauxPublics: 'Travaux Publics',
       travauxPublicsDesc: 'Routes, voies ferrées, digues et ouvrages d\'assainissement',
       transportDesc: 'Logistique, chantiers et livraisons régulières partout en Congo',
+      rigMontageDesc: 'Montage, installation et mise en service d\'équipements de forage sur chantier',
     },
     home: {
       stats: {

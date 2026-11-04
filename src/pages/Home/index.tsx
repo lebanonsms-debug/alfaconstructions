@@ -25,6 +25,7 @@ export default function Home() {
         { image: '/images/hero-travaux-publics.jpg', title: t('services.travauxPublics'), desc: t('services.travauxPublicsDesc'), slug: 'travaux-publics' },
         { image: '/images/hero-transport.jpg', title: t('services.transport'), desc: t('services.transportDesc'), slug: 'transport' },
         { image: '/images/hero-earthworks.jpg', title: 'Terrassement & Engins', desc: 'Préparation de sites, bulldozers, excavateurs et engins de chantier.', slug: 'terrassement' },
+        { image: 'https://images.pexels.com/photos/15391048/pexels-photo-15391048.jpeg?w=1920&q=80', title: t('services.rigMontage'), desc: t('services.rigMontageDesc'), slug: 'rig-montage' },
       ];
 
   const stats = [
