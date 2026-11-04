@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui";
 import { fontFamily } from "@/config/brand";
-import { ArrowRight, Mail } from "lucide-react";
-import { HeroScrollReveal } from "@/components/animation";
+import { ArrowRight, Mail, Building, Wrench, Route, Truck, Building2, Award, Users, Globe } from "lucide-react";
+import { HeroScrollReveal, AnimatedCrane } from "@/components/animation";
+import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
+import { HorizontalScrollBanner, TestimonialsCarousel, ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
 import { useCmsCategories } from "@/hooks/useCms";
@@ -92,41 +94,83 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-8 sm:py-12 bg-[#14263F]">
+      <section className="py-16 sm:py-24 bg-[#14263F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-3">
-              {t("home.methodTitle")}
-            </h2>
-            <p className="text-white/70 text-sm sm:text-base leading-relaxed">
-              {t("home.methodText1")}
-            </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <HeroScrollReveal>
+              <div>
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
+                  {t("home.methodTitle")}
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
+                  {t("home.methodTitle")}
+                </h2>
+                <p className="text-white/70 text-base leading-relaxed mb-4">
+                  {t("home.methodText1")}
+                </p>
+                <p className="text-white/70 text-base leading-relaxed mb-6">
+                  {t("home.methodText2")}
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link to={`/${i18n.language}/a-propos`}>
+                    <Button variant="primary" size="lg" className="gap-2">
+                      {t("home.learnMore")}
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                  <Link to={`/${i18n.language}/services`}>
+                    <Button variant="outline" size="lg">
+                      <Wrench className="w-4 h-4" /> {t("services.title")}
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </HeroScrollReveal>
+            <HeroScrollReveal delay={150}>
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#D4AF37]/10 to-[#0A192F] rounded-3xl" />
+                <div className="relative bg-[#0A192F] rounded-3xl p-4 sm:p-6">
+                  <AnimatedCrane className="w-full h-auto opacity-50" />
+                </div>
+              </div>
+            </HeroScrollReveal>
           </div>
         </div>
       </section>
 
-      <section className="py-8 sm:py-10 bg-[#0A192F]">
+      <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-6">
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-3 text-xs font-medium tracking-wide text-white/60">
-              EN TEMPS RÉEL
-            </div>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mb-2">
-              CHANTIER EN DIRECT
-            </h2>
-            <p className="text-white/60 text-sm max-w-xl mx-auto">
-              Suivez l'avancement de nos projets en temps réel
-            </p>
+          <div className="text-center mb-12">
+            <HeroScrollReveal>
+              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
+                EN TEMPS RÉEL
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+                CHANTIER EN DIRECT
+              </h2>
+              <p className="text-white/60 text-base">
+                Suivez l'avancement de nos projets en temps réel
+              </p>
+            </HeroScrollReveal>
           </div>
-          <div className="max-w-4xl mx-auto rounded-xl overflow-hidden border border-white/5 bg-[#14263F]">
-            <img
-              src="/images/hero-batiment.jpg"
-              alt="Chantier en direct"
-              className="w-full h-48 sm:h-64 object-cover opacity-80"
-            />
+          <div className="max-w-6xl mx-auto">
+            <HeroScrollReveal>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+                <div className="rounded-2xl overflow-hidden border border-white/5">
+                  <AnimatedConstructionSite className="w-full h-auto" />
+                </div>
+                <div className="flex flex-col justify-center p-4 sm:p-6">
+                  <AnimatedBuildingProgress className="w-full h-auto mb-4" />
+                  <AnimatedBuildingConstruction className="w-full h-auto max-h-[300px] object-contain" />
+                </div>
+              </div>
+            </HeroScrollReveal>
           </div>
         </div>
       </section>
+
+      <TestimonialsCarousel />
+      <ConstructionTimeline />
 
       <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
