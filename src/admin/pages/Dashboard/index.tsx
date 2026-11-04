@@ -1,16 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
 import {
-  BarChart3, FolderOpen, FileText, Mail, MessageSquare, Settings, Users, PenTool, TrendingUp, Clock, CheckCircle, RefreshCw, Plus
+  BarChart3, FolderOpen, FileText, Mail, MessageSquare, Settings, Users, PenTool, TrendingUp, Clock, CheckCircle, RefreshCw, Plus, Image
 } from 'lucide-react';
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
   const [stats, setStats] = useState({
-    projects: 0, services: 0, messages: 0, quotations: 0, totalProjects: 0
+    projects: 0, services: 0, messages: 0, quotations: 0, pages: 0, categories: 0, media: 0
   });
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -39,18 +39,23 @@ export default function AdminDashboard() {
   const fetchStats = async () => {
     try {
       setLoading(true);
-      const [projRes, servRes, msgRes, quoRes] = await Promise.all([
+      const [projRes, servRes, msgRes, quoRes, pageRes, catRes, mediaRes] = await Promise.all([
         supabase.from('projects').select('*', { count: 'exact', head: true }),
         supabase.from('services').select('*', { count: 'exact', head: true }),
         supabase.from('contact_messages').select('*', { count: 'exact', head: true }),
-        supabase.from('quotation_requests').select('*', { count: 'exact', head: true })
+        supabase.from('quotation_requests').select('*', { count: 'exact', head: true }),
+        supabase.from('cms_pages').select('*', { count: 'exact', head: true }),
+        supabase.from('cms_categories').select('*', { count: 'exact', head: true }),
+        supabase.from('cms_media').select('*', { count: 'exact', head: true }),
       ]);
       setStats({
         projects: projRes.count || 0,
         services: servRes.count || 0,
         messages: msgRes.count || 0,
         quotations: quoRes.count || 0,
-        totalProjects: projRes.count || 0
+        pages: pageRes.count || 0,
+        categories: catRes.count || 0,
+        media: mediaRes.count || 0,
       });
     } catch (error) {
       console.error('Error fetching stats:', error);
@@ -61,10 +66,13 @@ export default function AdminDashboard() {
   };
 
   const statCards = [
-    { label: 'Projets', value: stats.projects, icon: FolderOpen },
-    { label: 'Services', value: stats.services, icon: PenTool },
-    { label: 'Messages', value: stats.messages, icon: Mail },
-    { label: 'Devis', value: stats.quotations, icon: MessageSquare },
+    { label: 'Projets', value: stats.projects, icon: FolderOpen, href: '/admin/projects' },
+    { label: 'Services', value: stats.services, icon: PenTool, href: '/admin/services' },
+    { label: 'Messages', value: stats.messages, icon: Mail, href: '/admin/messages' },
+    { label: 'Devis', value: stats.quotations, icon: MessageSquare, href: '/admin/quotations' },
+    { label: 'Pages', value: stats.pages, icon: FileText, href: '/admin/pages' },
+    { label: 'Catégories', value: stats.categories, icon: FolderOpen, href: '/admin/categories' },
+    { label: 'Médias', value: stats.media, icon: Image as any, href: '/admin/media' },
   ];
 
   return (
@@ -99,8 +107,8 @@ export default function AdminDashboard() {
         ) : (
           <>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              {statCards.map((card, i) => (
-                <div key={i} className="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-colors">
+              {statCards.map((card) => (
+                <Link key={card.label} to={card.href} className="bg-white/5 rounded-xl p-4 hover:bg-white/10 transition-colors cursor-pointer">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-[#0A192F]">
                       <card.icon className="w-5 h-5 text-[#D4AF37]" />
@@ -110,7 +118,7 @@ export default function AdminDashboard() {
                       <p className="text-2xl font-bold text-white">{card.value}</p>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
 
