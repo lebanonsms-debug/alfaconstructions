@@ -42,6 +42,9 @@ const fr = {
       travauxPublicsDesc: 'Routes, voies ferrées, digues et ouvrages d\'assainissement',
       transportDesc: 'Logistique, chantiers et livraisons régulières partout en Congo',
       rigMontageDesc: 'Montage, installation et mise en service d\'équipements de forage sur chantier',
+      bureauDesc: 'Études techniques, faisabilité, planification et suivi d\'exécution par des experts',
+      topography: 'Travaux de terrassement et topographie',
+      topographyDesc: 'Travaux de terrassement, nivellement et levés topographiques pour préparer vos terrains avec précision',
     },
     home: {
       stats: {
@@ -154,6 +157,11 @@ const en = {
       travauxPublics: 'Public Works',
       travauxPublicsDesc: 'Roads, railways, dikes and sanitation works',
       transportDesc: 'Logistics, construction sites and regular deliveries throughout Congo',
+      rigMontage: 'Rig Assembly and Setup',
+      rigMontageDesc: 'Assembly, installation, and commissioning of drilling equipment on site',
+      bureauDesc: 'Technical studies, feasibility, planning and execution supervision by experts',
+      topography: 'Earthworks and Topography',
+      topographyDesc: 'Earthworks, leveling, and topographic surveys to prepare your land with precision',
     },
     home: {
       stats: {
