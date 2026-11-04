@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { Save, Trash2, Globe, Mail, Phone, MapPin, Building, Clock, CheckCircle } from 'lucide-react';
+import { Save, Trash2, Globe, Mail, Phone, MapPin, Building, Clock, CheckCircle, Palette, Type, LayoutGrid } from 'lucide-react';
 
 export default function AdminSettings() {
   const navigate = useNavigate();
@@ -21,6 +21,9 @@ export default function AdminSettings() {
     homepage_content: '',
     footer_content: '',
     seo_defaults: '',
+    primary_color: '#0A192F',
+    accent_color: '#D4AF37',
+    font_family: 'Inter',
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -146,6 +149,40 @@ export default function AdminSettings() {
                   <div className="flex gap-3">
                     <div className="w-1/3"><label className={labelClass}>Réglages SEO</label></div>
                     <div className="w-2/3"><textarea value={settings.seo_defaults} onChange={(e) => setSettings({ ...settings, seo_defaults: e.target.value })} className={inputClass} rows={4} /></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold text-white mb-4 flex items-center gap-2"><Palette className="w-5 h-5 text-[#D4AF37]" />Apparence et design</h3>
+                <div className="space-y-3">
+                  <div className="flex gap-3 items-center">
+                    <div className="w-1/3"><label className={labelClass}>Couleur primaire</label></div>
+                    <div className="w-2/3 flex gap-2">
+                      <input type="color" value={settings.primary_color} onChange={(e) => setSettings({ ...settings, primary_color: e.target.value })} className="h-10 w-16 rounded cursor-pointer bg-transparent border border-white/20" />
+                      <input type="text" value={settings.primary_color} onChange={(e) => setSettings({ ...settings, primary_color: e.target.value })} className={inputClass} />
+                    </div>
+                  </div>
+                  <div className="flex gap-3 items-center">
+                    <div className="w-1/3"><label className={labelClass}>Couleur accent</label></div>
+                    <div className="w-2/3 flex gap-2">
+                      <input type="color" value={settings.accent_color} onChange={(e) => setSettings({ ...settings, accent_color: e.target.value })} className="h-10 w-16 rounded cursor-pointer bg-transparent border border-white/20" />
+                      <input type="text" value={settings.accent_color} onChange={(e) => setSettings({ ...settings, accent_color: e.target.value })} className={inputClass} />
+                    </div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>Police d'écriture</label></div>
+                    <div className="w-2/3">
+                      <select value={settings.font_family} onChange={(e) => setSettings({ ...settings, font_family: e.target.value })} className={inputClass}>
+                        <option value="Inter">Inter</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="Roboto">Roboto</option>
+                        <option value="Open Sans">Open Sans</option>
+                        <option value="Montserrat">Montserrat</option>
+                      </select>
+                    </div>
                   </div>
                 </div>
               </div>
