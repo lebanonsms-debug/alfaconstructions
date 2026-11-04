@@ -95,30 +95,6 @@ export default function AdminCategories() {
     setShowModal(true);
   };
 
-  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    try {
-      const folder = `category-videos/${Date.now()}`;
-      const ext = file.name.split('.').pop();
-      const fileName = `${folder}/${Date.now()}.${ext}`;
-      const { error } = await supabase.storage
-        .from('alfaconstructions-uploads')
-        .upload(fileName, file);
-
-      if (error) throw error;
-
-      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
-      setFormData({ ...formData, video_url: publicUrl });
-      setVideoPreview(publicUrl);
-    } catch (error) {
-      console.error('Upload error:', error);
-    } finally {
-      setUploading(false);
-    }
-  };
-
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -134,8 +110,32 @@ export default function AdminCategories() {
       if (error) throw error;
 
       const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
-      setFormData({ ...formData, image_path: publicUrl });
+      setFormData((prev) => ({ ...prev, image_path: publicUrl }));
       setPreviewUrl(publicUrl);
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const folder = `category-videos/${Date.now()}`;
+      const ext = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('alfaconstructions-uploads')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
+      setFormData((prev) => ({ ...prev, video_url: publicUrl }));
+      setVideoPreview(publicUrl);
     } catch (error) {
       console.error('Upload error:', error);
     } finally {

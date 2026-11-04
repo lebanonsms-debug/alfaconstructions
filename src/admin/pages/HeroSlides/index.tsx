@@ -137,7 +137,7 @@ export default function AdminHeroSlides() {
       if (error) throw error;
 
       const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
-      setFormData({ ...formData, image_url: publicUrl });
+      setFormData((prev) => ({ ...prev, image_url: publicUrl }));
       setImagePreview(publicUrl);
     } catch (error) {
       console.error('Upload error:', error);
@@ -161,7 +161,7 @@ export default function AdminHeroSlides() {
       if (error) throw error;
 
       const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
-      setFormData({ ...formData, video_url: publicUrl });
+      setFormData((prev) => ({ ...prev, video_url: publicUrl }));
       setVideoPreview(publicUrl);
     } catch (error) {
       console.error('Upload error:', error);
