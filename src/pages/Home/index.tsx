@@ -7,16 +7,26 @@ import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, Animate
 import { HorizontalScrollBanner, TestimonialsCarousel, ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
+import { useCmsCategories } from "@/hooks/useCms";
 
 export default function Home() {
   const { t, i18n } = useTranslation();
+  const { categories } = useCmsCategories();
+  const isFr = i18n.language.startsWith('fr');
 
-  const services = [
-    { icon: Building2, title: t("services.batiment"), desc: t("services.batimentDesc"), featured: true },
-    { icon: Route, title: t("services.travauxPublics"), desc: t("services.travauxPublicsDesc"), featured: false },
-    { icon: Truck, title: t("services.transport"), desc: t("services.transportDesc"), featured: false },
-    { icon: Wrench, title: "Terrassement & Engins", desc: "Préparation de sites, bulldozers, excavateurs et engins de chantier.", featured: false },
-  ];
+  const services = categories.length > 0
+    ? categories.map((cat) => ({
+        image: cat.image_path || '/images/hero-batiment.jpg',
+        title: isFr ? (cat.name_fr || cat.name_en) : (cat.name_en || cat.name_fr),
+        desc: isFr ? (cat.description_fr || cat.description_en) : (cat.description_en || cat.description_fr),
+        slug: cat.slug,
+      }))
+    : [
+        { image: '/images/hero-batiment.jpg', title: t('services.batiment'), desc: t('services.batimentDesc'), slug: 'batiment' },
+        { image: '/images/hero-travaux-publics.jpg', title: t('services.travauxPublics'), desc: t('services.travauxPublicsDesc'), slug: 'travaux-publics' },
+        { image: '/images/hero-transport.jpg', title: t('services.transport'), desc: t('services.transportDesc'), slug: 'transport' },
+        { image: '/images/hero-earthworks.jpg', title: 'Terrassement & Engins', desc: 'Préparation de sites, bulldozers, excavateurs et engins de chantier.', slug: 'terrassement' },
+      ];
 
   const stats = [
     { value: "50+", label: t("home.stats.projects") },
@@ -49,13 +59,22 @@ export default function Home() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, i) => (
               <HeroScrollReveal key={i}>
-                <div className="group relative h-full bg-[#14263F] rounded-xl p-5 sm:p-6 border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
-                  <div className="w-12 h-12 rounded-xl bg-[#D4AF37]/10 text-[#D4AF37] flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                    <service.icon className="w-6 h-6" />
+                <Link to={`/services/${service.slug}`} className="group block h-full">
+                  <div className="relative h-full bg-[#14263F] rounded-xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
+                    <div className="relative h-40 sm:h-48 overflow-hidden">
+                      <img
+                        src={service.image}
+                        alt={service.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#14263F] via-[#14263F]/50 to-transparent" />
+                    </div>
+                    <div className="p-5 sm:p-6">
+                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#D4AF37] transition-colors">{service.title}</h3>
+                      <p className="text-sm text-white/60 leading-relaxed line-clamp-3">{service.desc}</p>
+                    </div>
                   </div>
-                  <h3 className="text-white font-semibold text-base mb-2">{service.title}</h3>
-                  <p className="text-sm text-white/60 leading-relaxed">{service.desc}</p>
-                </div>
+                </Link>
               </HeroScrollReveal>
             ))}
           </div>
