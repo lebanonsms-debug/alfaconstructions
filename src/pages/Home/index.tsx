@@ -124,36 +124,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-24 bg-[#0A192F]">
+      <section className="py-12 sm:py-16 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <HeroScrollReveal>
-            <div className="relative max-w-3xl mx-auto p-6 sm:p-10 rounded-2xl bg-[#0A192F]/50 border border-white/10 backdrop-blur-sm">
-              <div className="text-center">
-                <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                  <Mail className="w-3.5 h-3.5 mr-2" />
-                  {t("contact.title")}
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4">
-                  {t("home.contactTitle")}
-                </h2>
-                <p className="text-white/70 text-base mb-8 max-w-xl mx-auto">
-                  {t("home.contactText")}
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-                  <Link to={`/${i18n.language}/contact`}>
-                    <Button variant="primary" size="lg" className="gap-2 min-w-[220px]">
-                      <Mail className="w-4 h-4" /> {t("contact.title")}
-                    </Button>
-                  </Link>
-                  <Link to={`/${i18n.language}/a-propos`}>
-                    <Button variant="outline" size="lg" className="min-w-[220px]">
-                      {t("home.learnMore")}
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </HeroScrollReveal>
+          <div className="text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              {t("home.contactTitle")}
+            </h2>
+            <p className="text-white/60 text-base max-w-xl mx-auto mb-6">
+              {t("home.contactText")}
+            </p>
+            <Link to={`/${i18n.language}/contact`}>
+              <Button variant="primary" size="lg" className="min-w-[220px]">
+                <Mail className="w-4 h-4" /> {t("contact.title")}
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </>
