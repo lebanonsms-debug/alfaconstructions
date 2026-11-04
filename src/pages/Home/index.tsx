@@ -3,7 +3,6 @@ import { Button } from "@/components/ui";
 import { fontFamily } from "@/config/brand";
 import { Mail } from "lucide-react";
 import { HeroScrollReveal } from "@/components/animation";
-import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
 import { useCmsCategories } from "@/hooks/useCms";
@@ -95,31 +94,59 @@ export default function Home() {
 
       <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <HeroScrollReveal>
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                EN TEMPS RÉEL
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                CHANTIER EN DIRECT
-              </h2>
-              <p className="text-white/60 text-base">
-                Suivez l'avancement de nos projets en temps réel
-              </p>
-            </HeroScrollReveal>
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-[#D4AF37]">
+              EN TEMPS RÉEL
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              CHANTIER EN DIRECT
+            </h2>
+            <p className="text-white/60 text-base max-w-xl mx-auto">
+              Suivez l'avancement de nos projets en temps réel
+            </p>
           </div>
-          <div className="max-w-6xl mx-auto">
-            <HeroScrollReveal>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-                <div className="rounded-2xl overflow-hidden border border-white/5">
-                  <AnimatedConstructionSite className="w-full h-auto" />
-                </div>
-                <div className="flex flex-col justify-center p-4 sm:p-6">
-                  <AnimatedBuildingProgress className="w-full h-auto mb-4" />
-                  <AnimatedBuildingConstruction className="w-full h-auto max-h-[300px] object-contain" />
+          <div className="max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div className="md:col-span-2 rounded-2xl overflow-hidden border border-white/5 relative group">
+                <img
+                  src="/images/hero-batiment.jpg"
+                  alt="Chantier en direct"
+                  className="w-full h-64 sm:h-80 object-cover opacity-80 group-hover:opacity-90 transition-opacity duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0A192F] via-[#0A192F]/40 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-5 sm:p-6">
+                  <div className="text-xs font-medium text-[#D4AF37] tracking-wider mb-1">PROJET ACTUEL</div>
+                  <div className="text-white font-semibold text-lg sm:text-xl">Plateforme 600 — Brazzaville</div>
                 </div>
               </div>
-            </HeroScrollReveal>
+              <div className="rounded-2xl border border-white/5 bg-[#14263F] p-5 sm:p-6 flex flex-col justify-center gap-5">
+                <div>
+                  <div className="text-xs font-medium text-white/50 tracking-wider mb-2">AVANCEMENT GLOBAL</div>
+                  <div className="text-3xl font-bold text-white mb-1">65%</div>
+                  <div className="w-full bg-white/10 rounded-full h-2 mb-1">
+                    <div className="bg-[#D4AF37] h-2 rounded-full" style={{ width: '65%' }} />
+                  </div>
+                </div>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-xs text-white/50 mb-1">Fondations</div>
+                    <div className="text-white font-semibold">100%</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-white/50 mb-1">Structure</div>
+                    <div className="text-white font-semibold">75%</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-white/50 mb-1">Électricité</div>
+                    <div className="text-white font-semibold">40%</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-white/50 mb-1">Finitions</div>
+                    <div className="text-white font-semibold">20%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
