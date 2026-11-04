@@ -266,12 +266,6 @@ export function AnimatedCrane({ className = "", isRotating = true, speed = 12 })
         keySplines="0.4 0 0.6 1; 0.4 0 0.6 1"
       />
 
-      {/* Construction site sign */}
-      <rect x="25" y="320" width="90" height="15" rx="3" fill="#D4AF37" opacity="0.2" />
-      <text x="70" y="330" fill="#D4AF37" fontSize="8" fontFamily="sans-serif" textAnchor="middle" opacity="0.7">
-        SITE DE TRABALO
-      </text>
-
       <defs>
         {[...Array(5)].map((_, i) => (
           <linearGradient key={i} id={`floorGrad${i}`} x1="0%" y1="0%" x2="100%" y2="100%">
