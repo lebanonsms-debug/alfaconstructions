@@ -16,16 +16,17 @@
 
 **Repository:** https://github.com/lebanonsms-debug/alfaconstructions
 
-**Latest commit:** `eac951d` docs: update completion report with vercel fix status
+**Latest commit:** `258a51d` feat: add CMS frontend hook for pages, categories, and content blocks
 
-**Commit history:**
+**Commit history (latest 10):**
 ```
-eac951d docs: update completion report with vercel fix status
-775cdc7 chore: update package-lock after installing test deps
-68d1b70 fix: add SPA rewrite rule to vercel.json for client-side routing
-a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
-6294cb2 fix: resolve TypeScript strict mode errors, add auth types, fix imports
-6490ff7 feat: add hero carousel, dedicated service pages, plateforme 600, admin auth, sitemap, robots.txt
+258a51d feat: add CMS frontend hook for pages, categories, and content blocks
+f9fa3ba feat: enhance Media library with cms_media table and image previews
+11830fd feat: add ContentBlocks admin page and CMS routes
+82bbc80 feat: enhance settings page with design controls (colors, fonts)
+e1a7fc9 feat: enhance dashboard with CMS stats, add pages/categories admin, add CMS tables to Supabase
+25dc692 feat: add admin Pages and Categories management with Supabase CMS tables
+[eac951d ... earlier commits ...]
 ```
 
 **Action required:**
@@ -51,11 +52,11 @@ a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 
 ## 3. Supabase Configuration
 
-**Status:** Client configured, but database setup requires manual verification.
+**Status:** Client configured with CMS tables created via migration.
 
 **Environment variables:** Stored in Vercel project environment. Local `.env` and `.env.local` are access-denied (secret-bearing files).
 
-**Database tables required:**
+**Database tables:**
 - `profiles` — admin users
 - `services` — business services
 - `projects` — portfolio projects
@@ -63,15 +64,18 @@ a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 - `contact_messages` — contact form submissions
 - `quotation_requests` — quote form submissions
 - `site_settings` — CMS-like homepage content
+- `cms_pages` — dynamic pages management
+- `cms_sections` — page sections with translations
+- `cms_categories` — service categories with images
+- `cms_media` — media library with captions and alt text
+- `cms_settings` — design/appearance settings
+- `cms_content_blocks` — reusable content blocks
 
-**Migrations:** `supabase/migrations/001_initial_schema.sql` exists.
+**Storage bucket:** `alfaconstructions-uploads`
 
-**Action required:**
-1. Verify the Supabase project exists and is connected.
-2. Run migrations via Supabase CLI: `npx supabase db push` or apply manually.
-3. Verify Row Level Security (RLS) policies are active.
-4. Ensure the `alfaconstructions-uploads` storage bucket exists.
-5. Seed at least one admin user in `profiles` with `role = 'administrator'`.
+**CMS Admin Routes:** `/admin/pages`, `/admin/categories`, `/admin/content-blocks`, `/admin/media`, `/admin/settings`, `/admin/projects`, `/admin/services`, `/admin/messages`, `/admin/quotations`
+
+**Frontend CMS Hook:** `src/hooks/useCms.ts` — provides `useCmsPage()`, `useCmsCategories()`, `useCmsContentBlock()` for connecting frontend to Supabase CMS data
 
 ---
 
@@ -102,13 +106,16 @@ a6505ae feat: add i18n routes, LanguageSwitcher, vitest tests, fix navbar types
 | Route | Page | Status |
 |---|---|---|
 | `/admin/login` | Admin login (Supabase auth) | ✅ |
-| `/admin` | Dashboard overview | ✅ |
+| `/admin` | Dashboard overview + CMS stats | ✅ |
+| `/admin/pages` | Pages management (CRUD) | ✅ |
+| `/admin/categories` | Categories management (CRUD) | ✅ |
+| `/admin/content-blocks` | Content blocks editor | ✅ |
 | `/admin/projects` | Projects CRUD + real-time | ✅ |
 | `/admin/services` | Services CRUD + real-time | ✅ |
-| `/admin/media` | Media upload (Supabase Storage) | ✅ |
+| `/admin/media` | Media library with upload | ✅ |
 | `/admin/messages` | Contact messages + status filter | ✅ |
 | `/admin/quotations` | Quotation requests + real-time | ✅ |
-| `/admin/settings` | Site settings | ✅ |
+| `/admin/settings` | Site settings + design controls | ✅ |
 
 ### Features
 - **Hero carousel:** 5 slides with auto-play, manual nav, touch/swipe, keyboard, pause/resume, progress bar, reduced-motion support
