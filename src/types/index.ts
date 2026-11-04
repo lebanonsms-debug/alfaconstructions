@@ -159,3 +159,78 @@ export interface FileUpload {
   width?: number
   height?: number
 }
+
+export interface CmsPage {
+  id: string
+  slug: string
+  title_fr: string
+  title_en: string
+  description_fr?: string
+  description_en?: string
+  status: 'draft' | 'published' | 'archived'
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface CmsSection {
+  id: string
+  page_id: string
+  title_fr?: string
+  title_en?: string
+  content_fr?: string
+  content_en?: string
+  section_type: string
+  display_order: number
+  visible: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface CmsCategory {
+  id: string
+  slug: string
+  name_fr: string
+  name_en: string
+  description_fr?: string
+  description_en?: string
+  image_path?: string
+  display_order: number
+  visible: boolean
+  created_at: string
+  updated_at: string
+}
+
+export interface CmsMedia {
+  id: string
+  storage_path: string
+  file_name: string
+  file_type?: string
+  file_size?: number
+  caption_fr?: string
+  caption_en?: string
+  alt_text_fr?: string
+  alt_text_en?: string
+  category: string
+  display_order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface CmsSetting {
+  id: string
+  key: string
+  value?: string
+  value_type: string
+  group_name: string
+  updated_at: string
+}
+
+export interface CmsContentBlock {
+  id: string
+  block_key: string
+  content_fr?: string
+  content_en?: string
+  block_type: string
+  updated_at: string
+}

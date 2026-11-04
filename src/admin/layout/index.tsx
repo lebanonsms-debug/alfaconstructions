@@ -8,6 +8,8 @@ import { supabase } from '@/lib/supabase';
 
 const navItems = [
   { label: 'Tableau de bord', href: '/admin', icon: LayoutDashboard },
+  { label: 'Pages', href: '/admin/pages', icon: FileText },
+  { label: 'Catégories', href: '/admin/categories', icon: FolderOpen },
   { label: 'Projets', href: '/admin/projects', icon: FolderOpen },
   { label: 'Services', href: '/admin/services', icon: FileText },
   { label: 'Médias', href: '/admin/media', icon: ImageIcon },
