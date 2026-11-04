@@ -140,14 +140,6 @@ export function Footer() {
                 <Mail className="w-4 h-4 text-[#D4AF37]" />
                 <a href="mailto:ali-safa@alfa-constructions.com" className="hover:text-white transition-colors">ali-safa@alfa-constructions.com</a>
               </li>
-              {whatsappLink && (
-                <li className="flex items-center gap-3">
-                  <MessageCircle className="w-4 h-4 text-[#D4AF37]" />
-                  <a href={whatsappLink} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
-                    WhatsApp
-                  </a>
-                </li>
-              )}
             </ul>
           </div>
         </div>
