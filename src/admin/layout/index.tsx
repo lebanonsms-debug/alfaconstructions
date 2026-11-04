@@ -1,7 +1,7 @@
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
-import { LogOut, LayoutDashboard, FolderOpen, FileText, Image as ImageIcon, Mail, MessageSquare, Settings, Home } from 'lucide-react';
+import { LogOut, LayoutDashboard, FolderOpen, FileText, Image as ImageIcon, Mail, MessageSquare, Settings, Home, Type } from 'lucide-react';
 import { useState, useEffect, ReactNode } from 'react';
 import { useAuth } from '@/hooks/useAuth';
 import { supabase } from '@/lib/supabase';
@@ -16,6 +16,7 @@ const navItems = [
   { label: 'Messages', href: '/admin/messages', icon: Mail },
   { label: 'Devis', href: '/admin/quotations', icon: MessageSquare },
   { label: 'Paramètres', href: '/admin/settings', icon: Settings },
+  { label: 'Blocs', href: '/admin/content-blocks', icon: Type },
 ];
 
 interface AdminLayoutProps {
