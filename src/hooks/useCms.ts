@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
-import type { CmsPage, CmsSection, CmsCategory, CmsContentBlock } from '@/types';
+import type { CmsPage, CmsSection, CmsCategory, CmsContentBlock, CmsHeroSlide } from '@/types';
 
 export function useCmsPage(slug: string) {
   const [page, setPage] = useState<CmsPage | null>(null);
@@ -91,4 +91,30 @@ export function useCmsContentBlock(key: string) {
   };
 
   return { block, loading };
+}
+
+export function useCmsHeroSlides() {
+  const [slides, setSlides] = useState<CmsHeroSlide[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchSlides();
+  }, []);
+
+  const fetchSlides = async () => {
+    try {
+      const { data } = await supabase
+        .from('cms_hero_slides')
+        .select('*')
+        .eq('visible', true)
+        .order('display_order');
+      if (data) setSlides(data);
+    } catch (error) {
+      console.error('Error fetching hero slides:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return { slides, loading };
 }

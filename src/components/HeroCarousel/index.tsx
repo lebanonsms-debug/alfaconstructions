@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight, Play, Pause } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
+import { useCmsHeroSlides } from '@/hooks/useCms';
 
 interface Slide {
   id: number;
@@ -12,11 +13,11 @@ interface Slide {
   ctaLink: string;
 }
 
-function getSlides(t: any) {
+function getDefaultSlides(t: any): Slide[] {
   return [
     {
       id: 1,
-      image: 'https://images.unsplash.com/photo-1581094288338-2314dddb7ece?w=1920&q=80',
+      image: 'https://images.pexels.com/photos-1541888946425-d81bb19240f5?w=1920&q=80',
       title: t('hero.slide1'),
       subtitle: 'EXPLOITATION DE CARRIÈRES',
       description: t('hero.slide1Desc'),
@@ -25,7 +26,7 @@ function getSlides(t: any) {
     },
     {
       id: 2,
-      image: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1920&q=80',
+      image: 'https://images.pexels.com/photos-1504307651254-35680f356dfd?w=1920&q=80',
       title: t('hero.slide2'),
       subtitle: 'INGÉNIERIE & CONSTRUCTION',
       description: t('hero.slide2Desc'),
@@ -34,7 +35,7 @@ function getSlides(t: any) {
     },
     {
       id: 3,
-      image: 'https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1920&q=80',
+      image: 'https://images.pexels.com/photos-1590402494682-cd3fb53b1f70?w=1920&q=80',
       title: t('hero.slide3'),
       subtitle: 'TRANSPORT & LOGISTIQUE',
       description: t('hero.slide3Desc'),
@@ -43,7 +44,7 @@ function getSlides(t: any) {
     },
     {
       id: 4,
-      image: 'https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1920&q=80',
+      image: 'https://images.pexels.com/photos-1541888946425-d81bb19240f5?w=1920&q=80',
       title: t('hero.slide4'),
       subtitle: 'BÂTIMENT & TRAVAUX PUBLICS',
       description: t('hero.slide4Desc'),
@@ -52,7 +53,7 @@ function getSlides(t: any) {
     },
     {
       id: 5,
-      image: 'https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=1920&q=80',
+      image: 'https://images.pexels.com/photos-1504309092620-4d0ec726efa4?w=1920&q=80',
       title: t('hero.slide5'),
       subtitle: "BUREAU D'ÉTUDE",
       description: t('hero.slide5Desc'),
@@ -62,9 +63,25 @@ function getSlides(t: any) {
   ];
 }
 
+function mapCmsSlideToSlide(slide: any, lang: string): Slide {
+  const isFr = lang.startsWith('fr');
+  return {
+    id: parseInt(slide.id) || 0,
+    image: slide.image_url || '/images/hero-batiment.jpg',
+    title: isFr ? (slide.title_fr || '') : (slide.title_en || ''),
+    subtitle: isFr ? (slide.title_fr || '').toUpperCase() : (slide.title_en || '').toUpperCase(),
+    description: isFr ? (slide.description_fr || '') : (slide.description_en || ''),
+    ctaText: isFr ? 'Nous contacter' : 'Contact us',
+    ctaLink: '/contact',
+  };
+}
+
 export default function HeroCarousel() {
   const { t, i18n } = useTranslation();
-  const slides = getSlides(t);
+  const { slides: cmsSlides, loading } = useCmsHeroSlides();
+  const defaultSlides = getDefaultSlides(t);
+  const cmsMapped = cmsSlides.map((s) => mapCmsSlideToSlide(s, i18n.language));
+  const slides = cmsMapped.length > 0 ? cmsMapped : defaultSlides;
   const [current, setCurrent] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [progress, setProgress] = useState(0);
@@ -145,7 +162,7 @@ export default function HeroCarousel() {
       aria-roledescription="carousel"
     >
       {/* Slides */}
-      {slides.map((slide, index) => (
+      {slides.map((slide: Slide, index: number) => (
         <div
           key={slide.id}
           className={`absolute inset-0 transition-all duration-700 ease-in-out ${
@@ -224,7 +241,7 @@ export default function HeroCarousel() {
 
       {/* Slide indicators */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2" role="tablist" aria-label="Navigation du carrousel">
-        {slides.map((_, index) => (
+        {slides.map((_: Slide, index: number) => (
           <button
             key={index}
             onClick={() => goTo(index)}
