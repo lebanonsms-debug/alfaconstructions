@@ -154,24 +154,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <section className="py-12 sm:py-16 bg-[#0A192F]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-              {t("home.contactTitle")}
-            </h2>
-            <p className="text-white/60 text-base max-w-xl mx-auto mb-6">
-              {t("home.contactText")}
-            </p>
-            <Link to={`/${i18n.language}/contact`}>
-              <Button variant="primary" size="lg" className="min-w-[220px]">
-                <Mail className="w-4 h-4" /> {t("contact.title")}
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
     </>
   );
 }

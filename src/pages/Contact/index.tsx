@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { Input } from '@/components/ui';
 import { Textarea } from '@/components/ui';
@@ -8,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { supabase } from '@/lib/supabase';
-import { MapPin, Phone, Mail, Building, Send } from 'lucide-react';
+import { MapPin, Phone, Mail, Building } from 'lucide-react';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Le nom est requis').max(100),
@@ -60,17 +59,17 @@ export default function Contact() {
   };
 
   return (
-    <Layout>
+    <>
       <section className="py-16 sm:py-24 bg-[#0A192F]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
-              Contactez-nous
-            </h1>
-            <p className="text-white/60 text-lg max-w-2xl mx-auto">
-              Une question, un projet en tête ? Parlez-nous de vos besoins.
-            </p>
-          </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+            Contactez-nous
+          </h1>
+          <p className="text-white/60 text-lg max-w-2xl mx-auto">
+            Une question, un projet en tête ? Parlez-nous de vos besoins.
+          </p>
+        </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             <div>
@@ -205,6 +204,6 @@ export default function Contact() {
           </div>
         </div>
       </section>
-    </Layout>
+    </>
   );
 }
