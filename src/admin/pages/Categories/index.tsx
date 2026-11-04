@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { Plus, Edit, Trash2, Save, X, Image as ImageIcon, Eye, EyeOff } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Image as ImageIcon, Eye, EyeOff, Upload, Link2 } from 'lucide-react';
 import type { CmsCategory } from '@/types';
 
 export default function AdminCategories() {
@@ -12,6 +12,9 @@ export default function AdminCategories() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingCategory, setEditingCategory] = useState<CmsCategory | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState<string>('');
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     slug: '',
     name_fr: '',
@@ -79,7 +82,32 @@ export default function AdminCategories() {
       display_order: category.display_order,
       visible: category.visible,
     });
+    setPreviewUrl(category.image_path || '');
     setShowModal(true);
+  };
+
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const folder = `categories/${Date.now()}`;
+      const ext = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('alfaconstructions-uploads')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
+      setFormData({ ...formData, image_path: publicUrl });
+      setPreviewUrl(publicUrl);
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const inputClass = "w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]";
@@ -175,8 +203,47 @@ export default function AdminCategories() {
                   <textarea value={formData.description_en} onChange={(e) => setFormData({ ...formData, description_en: e.target.value })} className={inputClass} rows={3} />
                 </div>
                 <div>
-                  <label className={labelClass}>Image path</label>
-                  <input type="text" value={formData.image_path} onChange={(e) => setFormData({ ...formData, image_path: e.target.value })} className={inputClass} placeholder="/images/category.jpg" />
+                  <label className={labelClass}>Image</label>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        ref={fileInputRef}
+                        type="file"
+                        accept="image/*,video/*"
+                        className="hidden"
+                        onChange={handleFileChange}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => fileInputRef.current?.click()}
+                        disabled={uploading}
+                      >
+                        <Upload className="w-4 h-4 mr-2" />
+                        {uploading ? 'Téléchargement...' : 'Parcourir'}
+                      </Button>
+                      {(previewUrl || formData.image_path) && (
+                        <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/20 flex-shrink-0">
+                          <img
+                            src={previewUrl || formData.image_path}
+                            alt="Preview"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link2 className="w-4 h-4 text-white/40 flex-shrink-0" />
+                      <input
+                        type="text"
+                        value={formData.image_path}
+                        onChange={(e) => { setFormData({ ...formData, image_path: e.target.value }); setPreviewUrl(e.target.value); }}
+                        className={inputClass}
+                        placeholder="/images/category.jpg ou URL"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="flex gap-2 justify-end mt-4">
                   <Button variant="outline" onClick={() => setShowModal(false)}>Annuler</Button>

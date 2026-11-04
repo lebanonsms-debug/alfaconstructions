@@ -4,7 +4,6 @@ import { fontFamily } from "@/config/brand";
 import { Mail } from "lucide-react";
 import { HeroScrollReveal } from "@/components/animation";
 import { AnimatedConstructionSite, AnimatedExcavator, AnimatedDumpTruck, AnimatedBuildingProgress, AnimatedBuildingConstruction } from "@/components/construction-animations";
-import { ConstructionTimeline } from "@/components/advanced-animations";
 import HeroCarousel from "@/components/HeroCarousel";
 import { useTranslation } from "react-i18next";
 import { useCmsCategories } from "@/hooks/useCms";
@@ -124,8 +123,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <ConstructionTimeline />
 
       <section className="py-16 sm:py-24 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">

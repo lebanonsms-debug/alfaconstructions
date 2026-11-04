@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, ArrowUp, ArrowDown, Image as ImageIcon } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Eye, EyeOff, ArrowUp, ArrowDown, Image as ImageIcon, Upload, Link2, Film } from 'lucide-react';
 import type { CmsHeroSlide } from '@/types';
 
 export default function AdminHeroSlides() {
@@ -12,12 +12,18 @@ export default function AdminHeroSlides() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingSlide, setEditingSlide] = useState<CmsHeroSlide | null>(null);
+  const [uploading, setUploading] = useState(false);
+  const [imagePreview, setImagePreview] = useState<string>('');
+  const [videoPreview, setVideoPreview] = useState<string>('');
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     title_fr: '',
     title_en: '',
     description_fr: '',
     description_en: '',
     image_url: '',
+    video_url: '',
     display_order: 0,
     visible: true,
   });
@@ -39,14 +45,19 @@ export default function AdminHeroSlides() {
 
   const handleSave = async () => {
     try {
+      const payload: any = { ...formData };
+      if (!payload.video_url) delete payload.video_url;
+
       if (editingSlide) {
-        await supabase.from('cms_hero_slides').update(formData).eq('id', editingSlide.id);
+        await supabase.from('cms_hero_slides').update(payload).eq('id', editingSlide.id);
       } else {
-        await supabase.from('cms_hero_slides').insert(formData);
+        await supabase.from('cms_hero_slides').insert(payload);
       }
       setShowModal(false);
       setEditingSlide(null);
-      setFormData({ title_fr: '', title_en: '', description_fr: '', description_en: '', image_url: '', display_order: 0, visible: true });
+      setFormData({ title_fr: '', title_en: '', description_fr: '', description_en: '', image_url: '', video_url: '', display_order: 0, visible: true });
+      setImagePreview('');
+      setVideoPreview('');
       fetchSlides();
     } catch (error) {
       console.error('Error saving slide:', error);
@@ -85,7 +96,9 @@ export default function AdminHeroSlides() {
 
   const openAdd = () => {
     setEditingSlide(null);
-    setFormData({ title_fr: '', title_en: '', description_fr: '', description_en: '', image_url: '', display_order: slides.length, visible: true });
+    setFormData({ title_fr: '', title_en: '', description_fr: '', description_en: '', image_url: '', video_url: '', display_order: slides.length, visible: true });
+    setImagePreview('');
+    setVideoPreview('');
     setShowModal(true);
   };
 
@@ -97,14 +110,65 @@ export default function AdminHeroSlides() {
       description_fr: slide.description_fr,
       description_en: slide.description_en,
       image_url: slide.image_url,
+      video_url: slide.video_url || '',
       display_order: slide.display_order,
       visible: slide.visible,
     });
+    setImagePreview(slide.image_url || '');
+    setVideoPreview(slide.video_url || '');
     setShowModal(true);
   };
 
   const inputClass = "w-full px-3 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-[#D4AF37]";
   const labelClass = "block text-sm font-medium text-white/70 mb-1";
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const folder = `hero-slides/${Date.now()}`;
+      const ext = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('alfaconstructions-uploads')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
+      setFormData({ ...formData, image_url: publicUrl });
+      setImagePreview(publicUrl);
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const folder = `hero-videos/${Date.now()}`;
+      const ext = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('alfaconstructions-uploads')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
+      setFormData({ ...formData, video_url: publicUrl });
+      setVideoPreview(publicUrl);
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
+  };
 
   return (
     <Layout>
@@ -195,8 +259,86 @@ export default function AdminHeroSlides() {
                   <textarea value={formData.description_en} onChange={(e) => setFormData({ ...formData, description_en: e.target.value })} className={inputClass} rows={3} />
                 </div>
                 <div>
-                  <label className={labelClass}>URL de l'image</label>
-                  <input type="text" value={formData.image_url} onChange={(e) => setFormData({ ...formData, image_url: e.target.value })} className={inputClass} placeholder="/images/hero-batiment.jpg" />
+                  <label className={labelClass}>Image</label>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        ref={imageInputRef}
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleImageChange}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => imageInputRef.current?.click()}
+                        disabled={uploading}
+                      >
+                        <Upload className="w-4 h-4 mr-2" />
+                        {uploading ? 'Téléchargement...' : 'Parcourir'}
+                      </Button>
+                      {(imagePreview || formData.image_url) && (
+                        <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/20 flex-shrink-0">
+                          <img
+                            src={imagePreview || formData.image_url}
+                            alt="Preview"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link2 className="w-4 h-4 text-white/40 flex-shrink-0" />
+                      <input
+                        type="text"
+                        value={formData.image_url}
+                        onChange={(e) => { setFormData({ ...formData, image_url: e.target.value }); setImagePreview(e.target.value); }}
+                        className={inputClass}
+                        placeholder="/images/hero-batiment.jpg ou URL"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label className={labelClass}>Vidéo (optionnel)</label>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        ref={videoInputRef}
+                        type="file"
+                        accept="video/*"
+                        className="hidden"
+                        onChange={handleVideoChange}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => videoInputRef.current?.click()}
+                        disabled={uploading}
+                      >
+                        <Film className="w-4 h-4 mr-2" />
+                        {uploading ? 'Téléchargement...' : 'Parcourir'}
+                      </Button>
+                      {(videoPreview || formData.video_url) && (
+                        <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/20 flex-shrink-0 bg-white/5 flex items-center justify-center">
+                          <Film className="w-6 h-6 text-[#D4AF37]" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link2 className="w-4 h-4 text-white/40 flex-shrink-0" />
+                      <input
+                        type="text"
+                        value={formData.video_url}
+                        onChange={(e) => { setFormData({ ...formData, video_url: e.target.value }); setVideoPreview(e.target.value); }}
+                        className={inputClass}
+                        placeholder="URL vidéo (optionnel)"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="flex gap-2 justify-end mt-4">
                   <Button variant="outline" onClick={() => setShowModal(false)}>Annuler</Button>
