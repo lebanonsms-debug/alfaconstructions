@@ -2,9 +2,11 @@ import { Link } from 'react-router-dom'
 import { footerNavItems } from '@/config/brand'
 import { useSiteSettings } from '@/hooks/useSiteSettings'
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
+import { useState } from 'react'
 
 export function Footer() {
   const { settings } = useSiteSettings()
+  const [showWhatsAppChat, setShowWhatsAppChat] = useState(false)
 
   const socialLinks = [
     {
@@ -49,6 +51,13 @@ export function Footer() {
     return null
   }
 
+  const openWhatsApp = () => {
+    if (whatsappLink) {
+      window.open(whatsappLink, '_blank', 'noopener,noreferrer')
+      setShowWhatsAppChat(false)
+    }
+  }
+
   return (
     <footer className="bg-[#0A192F] border-t border-white/10">
       {/* Creative CTA strip */}
@@ -66,6 +75,20 @@ export function Footer() {
                 <MessageCircle className="w-5 h-5" />
                 WhatsApp
               </a>
+              <div className="flex items-center gap-2">
+                {socialLinks.slice(0, 3).map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#D4AF37]/20 text-white/60 hover:text-[#D4AF37] flex items-center justify-center transition-all"
+                    aria-label={link.ariaLabel}
+                  >
+                    {socialIcon(link.icon)}
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -155,6 +178,61 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* WhatsApp Chat Widget */}
+      {whatsappLink && (
+        <>
+          {/* Floating button */}
+          <button
+            onClick={() => setShowWhatsAppChat(!showWhatsAppChat)}
+            className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-all hover:scale-110 focus:outline-none focus-visible:ring-2 focus-visible:ring-green-500"
+            aria-label="Ouvrir le chat WhatsApp"
+            aria-expanded={showWhatsAppChat}
+          >
+            <MessageCircle className="w-6 h-6" />
+          </button>
+
+          {/* Chat bubble */}
+          {showWhatsAppChat && (
+            <div className="fixed bottom-24 right-6 z-50 w-80 bg-white rounded-2xl shadow-xl border border-white/10 overflow-hidden animate-slide-up">
+              <div className="bg-green-500 px-4 py-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
+                    <MessageCircle className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <p className="text-white font-semibold">ALFA CONSTRUCTION</p>
+                    <p className="text-white/80 text-xs">Génie civil & TP - Congo</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowWhatsAppChat(false)}
+                  className="text-white/80 hover:text-white transition-colors"
+                  aria-label="Fermer le chat"
+                >
+                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              <div className="p-4">
+                <p className="text-gray-700 mb-4">
+                  Bonjour ! Comment pouvons-nous vous aider aujourd'hui ?
+                  <br />
+                  Cliquez ci-dessous pour démarrer une conversation sur WhatsApp.
+                </p>
+                <button
+                  onClick={openWhatsApp}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-4 rounded-xl transition-colors flex items-center justify-center gap-2"
+                >
+                  <MessageCircle className="w-5 h-5" />
+                  Démarrer la conversation
+                </button>
+              </div>
+            </div>
+          )}
+        </>
+      )}
     </footer>
   )
 }
