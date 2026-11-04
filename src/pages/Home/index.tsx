@@ -42,46 +42,35 @@ export default function Home() {
       <section className="py-8 sm:py-12 bg-[#0A192F]">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <HeroScrollReveal>
-              <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
-                {t("home.servicesTitle")}
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
-                {t("services.title")}
-              </h2>
-              <p className="text-white/60 text-base max-w-2xl mx-auto">
-                {t("home.servicesSubtitle")}
-              </p>
-            </HeroScrollReveal>
+            <div className="inline-flex items-center px-3 py-1 rounded-full bg-[#D4AF37]/10 border border-[#D4AF37]/20 mb-4 text-xs font-medium tracking-wide text-white/60">
+              {t("home.servicesTitle")}
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white mb-3">
+              {t("services.title")}
+            </h2>
+            <p className="text-white/60 text-base max-w-2xl mx-auto">
+              {t("home.servicesSubtitle")}
+            </p>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {services.map((service, i) => (
-              <HeroScrollReveal key={i}>
-                <Link to={`/services/${service.slug}`} className="group block h-full">
-                  <div className="relative h-full bg-[#14263F] rounded-xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
-                    <div className="relative h-40 sm:h-48 overflow-hidden">
-                      <img
-                        src={service.image}
-                        alt={service.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#14263F] via-[#14263F]/50 to-transparent" />
-                    </div>
-                    <div className="p-5 sm:p-6">
-                      <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#D4AF37] transition-colors">{service.title}</h3>
-                      <p className="text-sm text-white/60 leading-relaxed line-clamp-3">{service.desc}</p>
-                    </div>
+              <Link to={`/services/${service.slug}`} className="group block h-full">
+                <div className="relative h-full bg-[#14263F] rounded-xl overflow-hidden border border-white/5 hover:border-[#D4AF37]/30 transition-all duration-300 hover:shadow-lg hover:shadow-[#D4AF37]/5 hover:-translate-y-1">
+                  <div className="relative h-40 sm:h-48 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#14263F] via-[#14263F]/50 to-transparent" />
                   </div>
-                </Link>
-              </HeroScrollReveal>
+                  <div className="p-5 sm:p-6">
+                    <h3 className="text-white font-semibold text-base mb-2 group-hover:text-[#D4AF37] transition-colors">{service.title}</h3>
+                    <p className="text-sm text-white/60 leading-relaxed line-clamp-3">{service.desc}</p>
+                  </div>
+                </div>
+              </Link>
             ))}
-          </div>
-          <div className="mt-8 max-w-4xl mx-auto">
-            <HeroScrollReveal>
-              <div className="bg-[#14263F] rounded-xl p-4 sm:p-6 border border-white/5">
-                <AnimatedCrane className="w-full h-auto opacity-80" />
-              </div>
-            </HeroScrollReveal>
           </div>
         </div>
       </section>
