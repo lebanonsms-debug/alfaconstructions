@@ -12,10 +12,10 @@ export default function Home() {
   const { t, i18n } = useTranslation();
 
   const services = [
-    { icon: Wrench, title: t("services.carrieres"), desc: t("services.carrieresDesc"), featured: true },
-    { icon: Building2, title: t("services.batiment"), desc: t("services.batimentDesc"), featured: false },
+    { icon: Building2, title: t("services.batiment"), desc: t("services.batimentDesc"), featured: true },
     { icon: Route, title: t("services.travauxPublics"), desc: t("services.travauxPublicsDesc"), featured: false },
     { icon: Truck, title: t("services.transport"), desc: t("services.transportDesc"), featured: false },
+    { icon: Wrench, title: "Terrassement & Engins", desc: "Préparation de sites, bulldozers, excavateurs et engins de chantier.", featured: false },
   ];
 
   const stats = [

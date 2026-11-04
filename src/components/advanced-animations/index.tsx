@@ -11,33 +11,33 @@ export function HorizontalScrollBanner({ className = '' }) {
 
   const slides = [
     {
-      image: "/images/hero-construction-fleet.png",
+      image: "/images/hero-batiment.jpg",
       title: "Bâtiment",
       subtitle: "Construction de bâtiments résidentiels et commerciaux",
       color: "#18F37A",
     },
     {
-      image: "/images/hero-earthworks.png",
+      image: "/images/hero-travaux-publics.jpg",
       title: "Travaux Publics",
       subtitle: "Routes, voies ferrées et ouvrages d'assainissement",
       color: "#D4AF37",
     },
     {
-      image: "/images/hero-excavators.png",
-      title: "Carrière de pierres",
-      subtitle: "Extraction et commercialisation de pierres et granulats",
-      color: "#8B5A2B",
-    },
-    {
-      image: "/images/hero-concrete.png",
+      image: "/images/hero-transport.jpg",
       title: "Transport & Logistique",
       subtitle: "Chantiers et livraisons partout en Congo",
       color: "#3B82F6",
     },
     {
-      image: "/images/hero-grader.png",
-      title: "Génie Civil",
-      subtitle: "Ouvrages d'art, digues et infrastructures",
+      image: "/images/hero-earthworks.jpg",
+      title: "Terrassement & Engins",
+      subtitle: "Préparation de sites, bulldozers et excavateurs",
+      color: "#8B5A2B",
+    },
+    {
+      image: "/images/hero-quarry.jpg",
+      title: "Carrière de Pierre",
+      subtitle: "Extraction et commercialisation de pierres et granulats",
       color: "#D4AF37",
     },
   ];

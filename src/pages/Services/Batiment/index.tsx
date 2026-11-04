@@ -9,6 +9,14 @@ export default function Batiment() {
     <Layout>
       {/* Split Hero */}
       <section className="relative min-h-[40vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
+        <div className="absolute inset-0">
+          <img
+            src="/images/hero-batiment.jpg"
+            alt="Bâtiment"
+            className="w-full h-full object-cover opacity-30"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0A192F]/90 via-[#0A192F]/70 to-transparent" />
+        </div>
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             {/* Bâtiment */}

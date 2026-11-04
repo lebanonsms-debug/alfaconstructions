@@ -10,7 +10,7 @@ export default function Transport() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1590402494682-cd3fb53b1f70?w=1920&q=80"
+            src="/images/hero-transport.jpg"
             alt="Transport"
             className="w-full h-full object-cover opacity-40"
           />

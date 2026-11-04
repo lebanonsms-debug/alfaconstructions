@@ -11,7 +11,7 @@ export default function Carrieres() {
       <section className="relative min-h-[50vh] flex items-center overflow-hidden bg-[#0A192F] pt-16">
         <div className="absolute inset-0">
           <img
-            src="/images/hero-excavators.png"
+            src="/images/hero-quarry.jpg"
             alt="Carrière"
             className="w-full h-full object-cover opacity-40"
           />
