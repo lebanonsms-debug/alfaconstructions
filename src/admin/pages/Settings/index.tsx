@@ -17,6 +17,11 @@ export default function AdminSettings() {
     address: 'Avenue Docteur Cardorelle, Songolo, Centre-Ville, Boulevard Charles de Gaulle, Immeuble Hôtel Elaïs, République du Congo',
     website: 'www.alfa-constructions.com',
     social_links: '',
+    whatsapp_number: '',
+    facebook_url: '',
+    instagram_url: '',
+    tiktok_url: '',
+    linkedin_url: '',
     business_hours: 'Lun - Ven: 8h00 - 17h00, Sam: 8h00 - 12h00',
     homepage_content: '',
     footer_content: '',
@@ -125,6 +130,26 @@ export default function AdminSettings() {
                   <div className="flex gap-3">
                     <div className="w-1/3"><label className={labelClass}>Site web</label></div>
                     <div className="w-2/3"><input type="text" value={settings.website} onChange={(e) => setSettings({ ...settings, website: e.target.value })} className={inputClass} /></div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>WhatsApp</label></div>
+                    <div className="w-2/3"><input type="text" value={settings.whatsapp_number} onChange={(e) => setSettings({ ...settings, whatsapp_number: e.target.value })} className={inputClass} placeholder="+242 06 822 22 20" /></div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>Facebook URL</label></div>
+                    <div className="w-2/3"><input type="text" value={settings.facebook_url} onChange={(e) => setSettings({ ...settings, facebook_url: e.target.value })} className={inputClass} placeholder="https://facebook.com/..." /></div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>Instagram URL</label></div>
+                    <div className="w-2/3"><input type="text" value={settings.instagram_url} onChange={(e) => setSettings({ ...settings, instagram_url: e.target.value })} className={inputClass} placeholder="https://instagram.com/..." /></div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>TikTok URL</label></div>
+                    <div className="w-2/3"><input type="text" value={settings.tiktok_url} onChange={(e) => setSettings({ ...settings, tiktok_url: e.target.value })} className={inputClass} placeholder="https://tiktok.com/..." /></div>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="w-1/3"><label className={labelClass}>LinkedIn URL</label></div>
+                    <div className="w-2/3"><input type="text" value={settings.linkedin_url} onChange={(e) => setSettings({ ...settings, linkedin_url: e.target.value })} className={inputClass} placeholder="https://linkedin.com/..." /></div>
                   </div>
                   <div className="flex gap-3">
                     <div className="w-1/3"><label className={labelClass}>Horaires d'ouverture</label></div>

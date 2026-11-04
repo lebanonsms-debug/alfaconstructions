@@ -34,6 +34,7 @@ import AdminLogin from '@/admin/pages/Login'
 import AdminPages from '@/admin/pages/Pages'
 import AdminCategories from '@/admin/pages/Categories'
 import AdminContentBlocks from '@/admin/pages/ContentBlocks'
+import AdminHeroSlides from '@/admin/pages/HeroSlides'
 
 function LangRoute({ lang, children }: { lang: string; children: React.ReactNode }) {
   const { i18n } = useTranslation();
@@ -103,6 +104,7 @@ function App() {
         <Route path="/admin/pages" element={<AdminLayout><AdminPages /></AdminLayout>} />
         <Route path="/admin/categories" element={<AdminLayout><AdminCategories /></AdminLayout>} />
         <Route path="/admin/content-blocks" element={<AdminLayout><AdminContentBlocks /></AdminLayout>} />
+        <Route path="/admin/hero-slides" element={<AdminLayout><AdminHeroSlides /></AdminLayout>} />
       </Routes>
     </BrowserRouter>
   )

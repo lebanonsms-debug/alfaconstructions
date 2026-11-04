@@ -17,6 +17,7 @@ const navItems = [
   { label: 'Devis', href: '/admin/quotations', icon: MessageSquare },
   { label: 'Paramètres', href: '/admin/settings', icon: Settings },
   { label: 'Blocs', href: '/admin/content-blocks', icon: Type },
+  { label: 'Hero Slides', href: '/admin/hero-slides', icon: ImageIcon },
 ];
 
 interface AdminLayoutProps {

@@ -234,3 +234,16 @@ export interface CmsContentBlock {
   block_type: string
   updated_at: string
 }
+
+export interface CmsHeroSlide {
+  id: string
+  title_fr: string
+  title_en: string
+  description_fr: string
+  description_en: string
+  image_url: string
+  display_order: number
+  visible: boolean
+  created_at: string
+  updated_at: string
+}
