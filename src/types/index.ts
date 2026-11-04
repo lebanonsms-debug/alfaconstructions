@@ -195,6 +195,7 @@ export interface CmsCategory {
   description_fr?: string
   description_en?: string
   image_path?: string
+  video_url?: string
   display_order: number
   visible: boolean
   created_at: string

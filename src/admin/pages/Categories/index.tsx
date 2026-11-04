@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Layout } from '@/components/layout';
 import { Button } from '@/components/ui';
 import { supabase } from '@/lib/supabase';
-import { Plus, Edit, Trash2, Save, X, Image as ImageIcon, Eye, EyeOff, Upload, Link2 } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X, Image as ImageIcon, Eye, EyeOff, Upload, Link2, Film } from 'lucide-react';
 import type { CmsCategory } from '@/types';
 
 export default function AdminCategories() {
@@ -14,7 +14,9 @@ export default function AdminCategories() {
   const [editingCategory, setEditingCategory] = useState<CmsCategory | null>(null);
   const [uploading, setUploading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState<string>('');
+  const [videoPreview, setVideoPreview] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const videoInputRef = useRef<HTMLInputElement>(null);
   const [formData, setFormData] = useState({
     slug: '',
     name_fr: '',
@@ -22,6 +24,7 @@ export default function AdminCategories() {
     description_fr: '',
     description_en: '',
     image_path: '',
+    video_url: '',
     display_order: 0,
     visible: true,
   });
@@ -50,7 +53,9 @@ export default function AdminCategories() {
       }
       setShowModal(false);
       setEditingCategory(null);
-      setFormData({ slug: '', name_fr: '', name_en: '', description_fr: '', description_en: '', image_path: '', display_order: 0, visible: true });
+      setFormData({ slug: '', name_fr: '', name_en: '', description_fr: '', description_en: '', image_path: '', video_url: '', display_order: 0, visible: true });
+      setPreviewUrl('');
+      setVideoPreview('');
       fetchCategories();
     } catch (error) {
       console.error('Error saving category:', error);
@@ -66,7 +71,9 @@ export default function AdminCategories() {
 
   const openAdd = () => {
     setEditingCategory(null);
-    setFormData({ slug: '', name_fr: '', name_en: '', description_fr: '', description_en: '', image_path: '', display_order: 0, visible: true });
+    setFormData({ slug: '', name_fr: '', name_en: '', description_fr: '', description_en: '', image_path: '', video_url: '', display_order: 0, visible: true });
+    setPreviewUrl('');
+    setVideoPreview('');
     setShowModal(true);
   };
 
@@ -79,11 +86,37 @@ export default function AdminCategories() {
       description_fr: category.description_fr || '',
       description_en: category.description_en || '',
       image_path: category.image_path || '',
+      video_url: category.video_url || '',
       display_order: category.display_order,
       visible: category.visible,
     });
     setPreviewUrl(category.image_path || '');
+    setVideoPreview(category.video_url || '');
     setShowModal(true);
+  };
+
+  const handleVideoChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setUploading(true);
+    try {
+      const folder = `category-videos/${Date.now()}`;
+      const ext = file.name.split('.').pop();
+      const fileName = `${folder}/${Date.now()}.${ext}`;
+      const { error } = await supabase.storage
+        .from('alfaconstructions-uploads')
+        .upload(fileName, file);
+
+      if (error) throw error;
+
+      const publicUrl = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/alfaconstructions-uploads/${fileName}`;
+      setFormData({ ...formData, video_url: publicUrl });
+      setVideoPreview(publicUrl);
+    } catch (error) {
+      console.error('Upload error:', error);
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -241,6 +274,45 @@ export default function AdminCategories() {
                         onChange={(e) => { setFormData({ ...formData, image_path: e.target.value }); setPreviewUrl(e.target.value); }}
                         className={inputClass}
                         placeholder="/images/category.jpg ou URL"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <label className={labelClass}>Vidéo (optionnel)</label>
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3">
+                      <input
+                        ref={videoInputRef}
+                        type="file"
+                        accept="video/*"
+                        className="hidden"
+                        onChange={handleVideoChange}
+                      />
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => videoInputRef.current?.click()}
+                        disabled={uploading}
+                      >
+                        <Film className="w-4 h-4 mr-2" />
+                        {uploading ? 'Téléchargement...' : 'Parcourir'}
+                      </Button>
+                      {(videoPreview || formData.video_url) && (
+                        <div className="w-16 h-16 rounded-lg overflow-hidden border border-white/20 flex-shrink-0 bg-white/5 flex items-center justify-center">
+                          <Film className="w-6 h-6 text-[#D4AF37]" />
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <Link2 className="w-4 h-4 text-white/40 flex-shrink-0" />
+                      <input
+                        type="text"
+                        value={formData.video_url}
+                        onChange={(e) => { setFormData({ ...formData, video_url: e.target.value }); setVideoPreview(e.target.value); }}
+                        className={inputClass}
+                        placeholder="URL vidéo (optionnel)"
                       />
                     </div>
                   </div>
