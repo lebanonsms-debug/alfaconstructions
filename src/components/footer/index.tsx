@@ -4,7 +4,7 @@ import { useSiteSettings } from '@/hooks/useSiteSettings'
 import { Mail, Phone, MapPin, MessageCircle } from 'lucide-react'
 import { useState } from 'react'
 
-export function Footer() {
+export function Footer({ showCtaStrip = true }: { showCtaStrip?: boolean }) {
   const { settings } = useSiteSettings()
   const [showWhatsAppChat, setShowWhatsAppChat] = useState(false)
 
@@ -60,40 +60,40 @@ export function Footer() {
 
   return (
     <footer className="bg-[#0A192F] border-t border-white/10">
-      {/* Creative CTA strip */}
-      <div className="bg-gradient-to-r from-[#D4AF37]/10 via-[#0A192F] to-[#D4AF37]/10 border-y border-white/10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Prêt à commencer votre projet ?</h3>
-              <p className="text-white/60 text-base max-w-xl">
-                Discutons de vos besoins en génie civil, bâtiment et travaux publics.
-              </p>
-            </div>
-            <div className="flex items-center gap-3">
-              <a href={whatsappLink || '#'} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all hover:scale-105">
-                <MessageCircle className="w-5 h-5" />
-                WhatsApp
-              </a>
-              <div className="flex items-center gap-2">
-                {socialLinks.slice(0, 3).map((link) => (
-                  <a
-                    key={link.name}
-                    href={link.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#D4AF37]/20 text-white/60 hover:text-[#D4AF37] flex items-center justify-center transition-all"
-                    aria-label={link.ariaLabel}
-                  >
-                    {socialIcon(link.icon)}
-                  </a>
-                ))}
+      {showCtaStrip && (
+        <div className="bg-gradient-to-r from-[#D4AF37]/10 via-[#0A192F] to-[#D4AF37]/10 border-y border-white/10">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-2">Prêt à commencer votre projet ?</h3>
+                <p className="text-white/60 text-base max-w-xl">
+                  Discutons de vos besoins en génie civil, bâtiment et travaux publics.
+                </p>
+              </div>
+              <div className="flex items-center gap-3">
+                <a href={whatsappLink || '#'} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 bg-green-500 hover:bg-green-600 text-white font-semibold rounded-xl transition-all hover:scale-105">
+                  <MessageCircle className="w-5 h-5" />
+                  WhatsApp
+                </a>
+                <div className="flex items-center gap-2">
+                  {socialLinks.slice(0, 3).map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-10 h-10 rounded-xl bg-white/10 hover:bg-[#D4AF37]/20 text-white/60 hover:text-[#D4AF37] flex items-center justify-center transition-all"
+                      aria-label={link.ariaLabel}
+                    >
+                      {socialIcon(link.icon)}
+                    </a>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-
+      )}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {/* Brand + Social */}

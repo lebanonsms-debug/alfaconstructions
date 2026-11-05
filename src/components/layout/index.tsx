@@ -9,6 +9,7 @@ export interface LayoutProps {
   noNavbar?: boolean
   noFooter?: boolean
   theme?: 'light' | 'dark'
+  showCtaStrip?: boolean
 }
 
 export function Layout({
@@ -18,6 +19,7 @@ export function Layout({
   noNavbar = false,
   noFooter = false,
   theme = 'light',
+  showCtaStrip = true,
 }: LayoutProps) {
   let pageTheme = ''
   if (theme === 'dark') {
@@ -31,7 +33,7 @@ export function Layout({
         <main className="flex-1 pt-16 sm:pt-20">
           {children}
         </main>
-        {!noFooter && <Footer />}
+        {!noFooter && <Footer showCtaStrip={showCtaStrip} />}
       </div>
     </div>
   )

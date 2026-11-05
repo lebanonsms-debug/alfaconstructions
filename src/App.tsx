@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Layout } from '@/components/layout'
 import { useTranslation } from 'react-i18next'
 import { useEffect } from 'react'
+import React from 'react'
 
 // Pages
 import Home from '@/pages/Home'
@@ -36,6 +37,17 @@ import AdminCategories from '@/admin/pages/Categories'
 import AdminContentBlocks from '@/admin/pages/ContentBlocks'
 import AdminHeroSlides from '@/admin/pages/HeroSlides'
 
+// Route wrapper with CTA strip control
+function PageRoute({ path, element, showCtaStrip }: { path: string; element: React.ReactElement; showCtaStrip?: boolean }) {
+  return (
+    <Route path={path} element={
+      <Layout showCtaStrip={showCtaStrip ?? true}>
+        {React.cloneElement(element, {})}
+      </Layout>
+    } />
+  )
+}
+
 function LangRoute({ lang, children }: { lang: string; children: React.ReactNode }) {
   const { i18n } = useTranslation();
   useEffect(() => { i18n.changeLanguage(lang); }, [lang, i18n]);
@@ -52,45 +64,45 @@ function App() {
         {/* French routes */}
         <Route path="/fr" element={<Navigate to="/fr/" replace />} />
         <Route path="/fr/" element={
-          <LangRoute lang="fr"><Layout><Home /></Layout></LangRoute>
+          <LangRoute lang="fr"><Layout showCtaStrip={true}><Home /></Layout></LangRoute>
         } />
-        <Route path="/fr/a-propos" element={<LangRoute lang="fr"><Layout><About /></Layout></LangRoute>} />
-        <Route path="/fr/services" element={<LangRoute lang="fr"><Layout><Services /></Layout></LangRoute>} />
-        <Route path="/fr/services/carrieres" element={<LangRoute lang="fr"><Layout><Carrieres /></Layout></LangRoute>} />
-        <Route path="/fr/services/batiment" element={<LangRoute lang="fr"><Layout><Batiment /></Layout></LangRoute>} />
-        <Route path="/fr/services/transport" element={<LangRoute lang="fr"><Layout><Transport /></Layout></LangRoute>} />
-        <Route path="/fr/services/bureau-etude" element={<LangRoute lang="fr"><Layout><BureauEtude /></Layout></LangRoute>} />
-        <Route path="/fr/realisations" element={<LangRoute lang="fr"><Layout><Projects /></Layout></LangRoute>} />
-        <Route path="/fr/realisations/:slug" element={<LangRoute lang="fr"><Layout><ProjectDetail /></Layout></LangRoute>} />
-        <Route path="/fr/plateforme-600" element={<LangRoute lang="fr"><Layout><Plateforme600 /></Layout></LangRoute>} />
-        <Route path="/fr/devis" element={<LangRoute lang="fr"><Layout><Quotation /></Layout></LangRoute>} />
-        <Route path="/fr/contact" element={<LangRoute lang="fr"><Layout><Contact /></Layout></LangRoute>} />
-        <Route path="/fr/politique-de-confidentialite" element={<LangRoute lang="fr"><Layout noFooter><Privacy /></Layout></LangRoute>} />
-        <Route path="/fr/mentions-legales" element={<LangRoute lang="fr"><Layout noFooter><Legal /></Layout></LangRoute>} />
-        <Route path="/fr/faq" element={<LangRoute lang="fr"><Layout><Faq /></Layout></LangRoute>} />
+        <PageRoute path="/fr/a-propos" element={<LangRoute lang="fr"><Layout><About /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/services" element={<LangRoute lang="fr"><Layout><Services /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/services/carrieres" element={<LangRoute lang="fr"><Layout><Carrieres /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/services/batiment" element={<LangRoute lang="fr"><Layout><Batiment /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/services/transport" element={<LangRoute lang="fr"><Layout><Transport /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/services/bureau-etude" element={<LangRoute lang="fr"><Layout><BureauEtude /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/realisations" element={<LangRoute lang="fr"><Layout><Projects /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/realisations/:slug" element={<LangRoute lang="fr"><Layout><ProjectDetail /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/plateforme-600" element={<LangRoute lang="fr"><Layout><Plateforme600 /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/devis" element={<LangRoute lang="fr"><Layout><Quotation /></Layout></LangRoute>} showCtaStrip={false} />
+        <Route path="/fr/contact" element={<LangRoute lang="fr"><Layout showCtaStrip={true}><Contact /></Layout></LangRoute>} />
+        <PageRoute path="/fr/politique-de-confidentialite" element={<LangRoute lang="fr"><Layout noFooter><Privacy /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/mentions-legales" element={<LangRoute lang="fr"><Layout noFooter><Legal /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/fr/faq" element={<LangRoute lang="fr"><Layout><Faq /></Layout></LangRoute>} showCtaStrip={false} />
 
         {/* English routes */}
         <Route path="/en" element={<Navigate to="/en/" replace />} />
         <Route path="/en/" element={
-          <LangRoute lang="en"><Layout><Home /></Layout></LangRoute>
+          <LangRoute lang="en"><Layout showCtaStrip={true}><Home /></Layout></LangRoute>
         } />
-        <Route path="/en/about" element={<LangRoute lang="en"><Layout><About /></Layout></LangRoute>} />
-        <Route path="/en/services" element={<LangRoute lang="en"><Layout><Services /></Layout></LangRoute>} />
-        <Route path="/en/services/quarry" element={<LangRoute lang="en"><Layout><Carrieres /></Layout></LangRoute>} />
-        <Route path="/en/services/building" element={<LangRoute lang="en"><Layout><Batiment /></Layout></LangRoute>} />
-        <Route path="/en/services/transport" element={<LangRoute lang="en"><Layout><Transport /></Layout></LangRoute>} />
-        <Route path="/en/services/engineering" element={<LangRoute lang="en"><Layout><BureauEtude /></Layout></LangRoute>} />
-        <Route path="/en/projects" element={<LangRoute lang="en"><Layout><Projects /></Layout></LangRoute>} />
-        <Route path="/en/projects/:slug" element={<LangRoute lang="en"><Layout><ProjectDetail /></Layout></LangRoute>} />
-        <Route path="/en/platform-600" element={<LangRoute lang="en"><Layout><Plateforme600 /></Layout></LangRoute>} />
-        <Route path="/en/quote" element={<LangRoute lang="en"><Layout><Quotation /></Layout></LangRoute>} />
-        <Route path="/en/contact" element={<LangRoute lang="en"><Layout><Contact /></Layout></LangRoute>} />
-        <Route path="/en/privacy" element={<LangRoute lang="en"><Layout noFooter><Privacy /></Layout></LangRoute>} />
-        <Route path="/en/legal" element={<LangRoute lang="en"><Layout noFooter><Legal /></Layout></LangRoute>} />
-        <Route path="/en/faq" element={<LangRoute lang="en"><Layout><Faq /></Layout></LangRoute>} />
+        <PageRoute path="/en/about" element={<LangRoute lang="en"><Layout><About /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/services" element={<LangRoute lang="en"><Layout><Services /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/services/quarry" element={<LangRoute lang="en"><Layout><Carrieres /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/services/building" element={<LangRoute lang="en"><Layout><Batiment /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/services/transport" element={<LangRoute lang="en"><Layout><Transport /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/services/engineering" element={<LangRoute lang="en"><Layout><BureauEtude /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/projects" element={<LangRoute lang="en"><Layout><Projects /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/projects/:slug" element={<LangRoute lang="en"><Layout><ProjectDetail /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/platform-600" element={<LangRoute lang="en"><Layout><Plateforme600 /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/quote" element={<LangRoute lang="en"><Layout><Quotation /></Layout></LangRoute>} showCtaStrip={false} />
+        <Route path="/en/contact" element={<LangRoute lang="en"><Layout showCtaStrip={true}><Contact /></Layout></LangRoute>} />
+        <PageRoute path="/en/privacy" element={<LangRoute lang="en"><Layout noFooter><Privacy /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/legal" element={<LangRoute lang="en"><Layout noFooter><Legal /></Layout></LangRoute>} showCtaStrip={false} />
+        <PageRoute path="/en/faq" element={<LangRoute lang="en"><Layout><Faq /></Layout></LangRoute>} showCtaStrip={false} />
 
         {/* 404 */}
-        <Route path="*" element={<Layout><NotFound /></Layout>} />
+        <PageRoute path="*" element={<Layout showCtaStrip={false}><NotFound /></Layout>} />
 
         {/* Admin routes (no language prefix) */}
         <Route path="/admin/login" element={<AdminLogin />} />
